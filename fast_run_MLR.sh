@@ -15,10 +15,10 @@ mkdir -p $BASEDIR/temp/MLR
 export MLR_Tune=No  # Set it to "Yes" if you want to optimize the parameters on Training set
 
 # ./MLR_train.sh train_data  k-fold  models
-. $BINDIR/MLR-QE/MLR_train.sh  MLR_train_LEX_LM_POS.data 5 MLR_models
+. $BINDIR/MLR-QE/MLR_train.sh  $BASEDIRR/data/MLR_train_LEX_LM_POS.data 5 MLR_models
 
 # ./MLR_test.sh  test_data  models  output
-. $BINDIR/MLR-QE/MLR_test.sh   MLR_test_LEX_LM_POS.data MLR_models MLR_output.prank
+. $BINDIR/MLR-QE/MLR_test.sh   $BASEDIRR/data/MLR_test_LEX_LM_POS.data MLR_models MLR_output.prank
 
 
 
