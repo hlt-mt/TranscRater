@@ -15,9 +15,8 @@ mkdir -p $BASEDIR/temp/RR
 export RR_Iter=10  # set the number of training iterations
 
 # ./RR_train.sh train_data  k-fold  models
-. $BINDIR/REG-QE/RR_train.sh  RR_train_LEX_LM_POS.data 5 RR_models
+. $BINDIR/REG-QE/RR_train.sh  $BASEDIR/data/RR_train_LEX_LM_POS.data 5 RR_models
   
 # ./RR_test.sh  test_data  models  output
-. $BINDIR/REG-QE/RR_test.sh   RR_test_LEX_LM_POS.data RR_models RR_output.pwer
-
+. $BINDIR/REG-QE/RR_test.sh   $BASEDIR/data/RR_test_LEX_LM_POS.data RR_models $BASEDIR/data/RR_output.pwer
 
