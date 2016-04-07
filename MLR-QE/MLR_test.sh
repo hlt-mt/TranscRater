@@ -6,15 +6,11 @@ outfile=$3
 
 printf "\nTest \"$modelsdir\" on \"$testFile\"...\n"
 
-# ----------------- Compute the Zscore
-python $BINDIR/bin/zscore_of_svmlight_format.py $testFile ${testFile}.zscore 2>&1 | grep WriteNothing
-testFile=${testFile}.zscore
-
 
 # ----------------- Predict ranks
 cat $testFile | cut -d' ' -f 1 > $BASEDIR/temp/MLR/test.label
 
-java -jar  $RANKLIBDIR/RankLib.jar -load  $modelsdir/MLR.model -rank $testFile \
+java -jar  $RANKLIBDIR/RankLib-2.6.jar -load  $modelsdir/MLR.model -rank $testFile -norm zscore \
                                    -metric2T NDCG@${CHANNELS} -score  $BASEDIR/temp/MLR/Scores 2>&1 | grep WriteNothing
 
 cat $BASEDIR/temp/MLR/Scores | awk '{printf("%.3f\n", $NF)}' > $outfile

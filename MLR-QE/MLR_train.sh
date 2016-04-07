@@ -7,9 +7,6 @@ modelsdir=$3
 
 best_parameters="-ranker 8 -bag 100 -tree 15 -leaf 15";
 
-# ----------------- Compute the Zscore
-python $BINDIR/bin/zscore_of_svmlight_format.py $trainFile ${trainFile}.zscore 2>&1 | grep WriteNothing
-trainFileZ=${trainFile}.zscore
 
 # ----------------- Create fold list
 /bin/bash $BINDIR/bin/make_folds.sh $trainFileZ $folds
@@ -25,7 +22,7 @@ if [[ $TuneMLR = Yes ]]; then
   for lf in 10 15 20; do
     printf "%sranker %d %sbag %d %stree %d %sleaf %d " - $type - $bg - $tr - $lf
     for fld in $(seq 1 $folds);  do
-      java -jar  $RANKLIBDIR/RankLib.jar -train $BASEDIR/temp/folds/fold_${fld}_train.data -validate $BASEDIR/temp/folds/fold_${fld}_test.data \
+      java -jar  $RANKLIBDIR/RankLib-2.6.jar -train $BASEDIR/temp/folds/fold_${fld}_train.data -validate $BASEDIR/temp/folds/fold_${fld}_test.data \
                                          -ranker $type -bag $bg -tree $tr -leaf $lf \
                                          -srate 0.5 -shrinkage 0.8 -tc 256 -mls 5  \
                                          -metric2t NDCG@${CHANNELS} -metric2T NDCG@${CHANNELS}  2>&1 | grep "NDCG@${CHANNELS} on validation data:" | awk '{print $NF}'
@@ -41,7 +38,7 @@ fi
 
 printf "\nTrain MLR models on \"$trainFile\"..."
 trainData=$BASEDIR/temp/folds/shuffled_train.data
-java -jar  $RANKLIBDIR/RankLib.jar  -train $trainData  \
+java -jar  $RANKLIBDIR/RankLib-2.6.jar  -train $trainData  \
                                     $best_parameters \
                                     -srate 0.5 -shrinkage 0.8 -tc 256 -mls 5  \
                                     -metric2t NDCG@${CHANNELS} -save  $modelsdir/MLR.model   2>&1 | grep WriteNothing
