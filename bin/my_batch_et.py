@@ -13,7 +13,7 @@ from sklearn.ensemble import ExtraTreesRegressor
 from scipy.stats import randint as sp_randint
 from sklearn.grid_search import RandomizedSearchCV
 from sklearn.metrics import make_scorer
-from sklearn.metrics.metrics import mean_absolute_error, mean_squared_error
+from sklearn.metrics import mean_absolute_error, mean_squared_error
 from sklearn.preprocessing import StandardScaler
 from sklearn.cross_validation import KFold
 from sklearn.linear_model import RandomizedLasso
