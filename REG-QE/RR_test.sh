@@ -11,7 +11,7 @@ printf "\nTest \"$modelsdir\" models on \"$testFile\"...\n"
 cat $testFile | cut -d' ' -f1 > $BASEDIR/temp/RR/test.label
 cat $testFile | tr ':' ' ' | awk '{for(i=5;i<=NF;i+=2) printf("%.4f ",$i); printf("\n")}' > $BASEDIR/temp/RR/test.feat
   
-python $BINDIR/bin/XRT_REG_test.py $BASEDIR/temp/RR/test.feat $modelsdir 2>&1 | grep -v "Parallel" >  $outfile
+python $BINDIR/bin/XRT_REG_test.py $BASEDIR/temp/RR/test.feat $modelsdir $outfile 2>&1 | grep WriteNothing
 
 if [[ ! `cat $BASEDIR/temp/RR/test.feat|wc -l` = `cat $outfile|wc -l` ]];
 then
