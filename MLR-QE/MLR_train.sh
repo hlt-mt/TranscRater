@@ -9,7 +9,7 @@ best_parameters="-ranker 8 -bag 100 -tree 15 -leaf 15";
 
 
 # ----------------- Create fold list
-/bin/bash $BINDIR/bin/make_folds.sh $trainFileZ $folds
+/bin/bash $BINDIR/bin/make_folds.sh $trainFile $folds
 
 
 # ----------------- Train/valid RR models
