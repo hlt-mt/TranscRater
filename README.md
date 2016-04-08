@@ -20,12 +20,13 @@ The requirments for feature extraction:
 - "TreeTagger" part-of-speech tagging toolkit
 
 #### Installation:
-The toolkit by itself does not need any installation nor complie. The user needs to download and compile the requirments and Modify the following environment variables at the top of the configuration file:
--OPENSMILEDIR= the directory of OpenSmile lib
--RNNLMDIR= the directory of RNNLM
--SRILMDIR= the directory of SRILM
--TREETAGDIR= the directory of TreeTagger
--RANKLIBDIR= the directory of RankLib
+The toolkit by itself does not need any installation nor compile. The user needs to download and compile the aforementioned requirments and modify the following environment variables at the top of the configuration file:
+
+- OPENSMILEDIR= the directory of OpenSmile lib
+- RNNLMDIR= the directory of RNNLM
+- SRILMDIR= the directory of SRILM
+- TREETAGDIR= the directory of TreeTagger
+- RANKLIBDIR= the directory of RankLib
 
 #### Usage:
 To see the first output of the system with regression models, in the root directory of the package, run the following command:
