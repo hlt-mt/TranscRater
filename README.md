@@ -10,15 +10,15 @@ The requirments for machine learning module:
 - Linux OS
 - "Python" > v2.7
 - "SciPy" 
-- "sklearn" python library
-- java > v1.8
-- "RankLib" > v2.6
+- "sklearn" python library (http://scikit-learn.org/stable/install.html)
+- java > v1.8 (http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
+- "RankLib" v2.6 (https://sourceforge.net/projects/lemur/files/lemur/RankLib-2.6/RankLib-2.6.jar/download)
 
 The requirments for feature extraction:
-- "OpenSmile" signal processing toolkit
-- "RNNLM" recurrent neural network language model toolkit
-- "SRILM" n-gram language model toolkit
-- "TreeTagger" part-of-speech tagging toolkit
+- "OpenSmile" signal processing toolkit (http://www.audeering.com/research/opensmile#download)
+- "RNNLM" recurrent neural network language model toolkit (http://www.fit.vutbr.cz/~imikolov/rnnlm/rnnlm-0.3e.tgz)
+- "SRILM" n-gram language model toolkit (http://www.speech.sri.com/projects/srilm/download.html)
+- "TreeTagger" part-of-speech tagging toolkit (http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/tree-tagger-linux-3.2.tar.gz)
 
 ### Installation:
 The toolkit by itself does not need any installation nor compile. The user needs to download and compile the aforementioned requirments and modify the following environment variables at the top of the configuration file:
@@ -45,7 +45,7 @@ This script will:
 6. show MAE and NDCG on the test data
 ```
 
-To see the first output of the system with machine-learned ranking (MLR) models, in the root directory of the package, run the following command:
+To see the first output of the system with machine-learned ranking (MLR) models, first download "RankLib-2.6.jar" and set its path in "./fast_run_MLR.sh" in the root directory of the package and then run the following command:
 ```
 ~/TranscRater> . fast_run_MLR.sh
 ```
