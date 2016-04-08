@@ -40,18 +40,20 @@ This script will:
 4. use the trained model to predict the WER of the "./data/RR_test_LEX_LM_POS.data"
 5. save the predicted WER on "./data/RR_output.pwer" and the predicted ranks on "data/RR_output.pwer.rank"
 6. show MAE and NDCG on the test data
+```
 
 To see the first output of the system with machine-learned ranking (MLR) models, in the root directory of the package, run the following command:
 ~/TranscRater> . fast_run_MLR.sh
 
 This script will:
+```
 1. use the data "./data/MLR_train_LEX_LM_POS.data" to train a regression model,
 2. save it into "./MLR_Models/"
 3. show NDCG on the training data
 4. use the trained model to predict the ranks on "./data/MLR_test_LEX_LM_POS.data"
 5. save the predicted ranks on "data/MLR_output.prank.rank"
 6. show NDCG on the test data
-
+```
 For a complete process on a real data set, starting from transcripts and feature extraction please go to "./egs/CHiME3/" directory where we use the data this corpora to train and test the ASR QE models. 
 
 
