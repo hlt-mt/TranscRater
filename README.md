@@ -30,25 +30,25 @@ The toolkit by itself does not need any installation nor compile. The user needs
 
 #### Usage:
 To see the first output of the system with regression models, in the root directory of the package, run the following command:
-. fast_run_RR.sh
+~/TranscRater> . fast_run_RR.sh
 
 This script will:
-1) use the data "./data/RR_train_LEX_LM_POS.data" to train a regression (RR) model,
-2) save it into "./RR_Models/"
-3) show mean absolute error (MAE) and normalized discounted cumulative gain (NDCG) on the training data
-4) use the trained model to predict the WER of the "./data/RR_test_LEX_LM_POS.data"
-5) save the predicted WER on "./data/RR_output.pwer" and the predicted ranks on "data/RR_output.pwer.rank"
-6) show MAE and NDCG on the test data
+1. use the data "./data/RR_train_LEX_LM_POS.data" to train a regression (RR) model,
+2. save it into "./RR_Models/"
+3. show mean absolute error (MAE) and normalized discounted cumulative gain (NDCG) on the training data
+4. use the trained model to predict the WER of the "./data/RR_test_LEX_LM_POS.data"
+5. save the predicted WER on "./data/RR_output.pwer" and the predicted ranks on "data/RR_output.pwer.rank"
+6. show MAE and NDCG on the test data
 
 To see the first output of the system with machine-learned ranking (MLR) models, in the root directory of the package, run the following command:
-. fast_run_MLR.sh
+~/TranscRater> . fast_run_MLR.sh
 
 This script will:
-1) use the data "./data/MLR_train_LEX_LM_POS.data" to train a regression model,
-2) save it into "./MLR_Models/"
-3) show NDCG on the training data
-4) use the trained model to predict the ranks on "./data/MLR_test_LEX_LM_POS.data"
-5) save the predicted ranks on "data/MLR_output.prank.rank"
+1. use the data "./data/MLR_train_LEX_LM_POS.data" to train a regression model,
+2. save it into "./MLR_Models/"
+3. show NDCG on the training data
+4. use the trained model to predict the ranks on "./data/MLR_test_LEX_LM_POS.data"
+5. save the predicted ranks on "data/MLR_output.prank.rank"
 6) show NDCG on the test data
 
 For a complete process on a real data set, starting from transcripts and feature extraction please go to "./egs/CHiME3/" directory where we use the data this corpora to train and test the ASR QE models. 
