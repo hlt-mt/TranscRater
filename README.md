@@ -30,7 +30,9 @@ The toolkit by itself does not need any installation nor compile. The user needs
 
 #### Usage:
 To see the first output of the system with regression models, in the root directory of the package, run the following command:
+```
 ~/TranscRater> . fast_run_RR.sh
+```
 
 This script will:
 ```
@@ -43,8 +45,9 @@ This script will:
 ```
 
 To see the first output of the system with machine-learned ranking (MLR) models, in the root directory of the package, run the following command:
+```
 ~/TranscRater> . fast_run_MLR.sh
-
+```
 This script will:
 ```
 1. use the data "./data/MLR_train_LEX_LM_POS.data" to train a regression model,
