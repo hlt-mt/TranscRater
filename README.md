@@ -33,6 +33,7 @@ To see the first output of the system with regression models, in the root direct
 ~/TranscRater> . fast_run_RR.sh
 
 This script will:
+```
 1. use the data "./data/RR_train_LEX_LM_POS.data" to train a regression (RR) model,
 2. save it into "./RR_Models/"
 3. show mean absolute error (MAE) and normalized discounted cumulative gain (NDCG) on the training data
@@ -49,7 +50,7 @@ This script will:
 3. show NDCG on the training data
 4. use the trained model to predict the ranks on "./data/MLR_test_LEX_LM_POS.data"
 5. save the predicted ranks on "data/MLR_output.prank.rank"
-6) show NDCG on the test data
+6. show NDCG on the test data
 
 For a complete process on a real data set, starting from transcripts and feature extraction please go to "./egs/CHiME3/" directory where we use the data this corpora to train and test the ASR QE models. 
 
