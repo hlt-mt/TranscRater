@@ -59,7 +59,11 @@ This script will:
 ```
 For a complete process on a real data set, starting from transcripts and feature extraction please go to "./egs/CHiME3/" directory where we use the data this corpora to train and test the ASR QE models. 
 
-
+# Contacts
+[Shahab Jalalvand](https://hlt-mt.fbk.eu/people/profile/jalalvand), Fondazione Bruno Kessler, Italy (jalalvand@fbk.eu)
+[Matteo Negri](http://hlt-mt.fbk.eu/people/profile/negri), Fondazione Bruno Kessler, Italy (negri@fbk.eu)
+[Marco Turchi](http://hlt-mt.fbk.eu/people/profile/turchi), Fondazione Bruno Kesler, Italy (turchi@fbk.eu)
+[Daniele Falavigna](http://hlt-mt.fbk.eu/people/profile/falavi), Fondazione Bruno Kesler, Italy (falavi@fbk.eu)
 
 
 
