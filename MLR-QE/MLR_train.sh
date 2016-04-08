@@ -5,29 +5,23 @@ folds=$2
 modelsdir=$3
 
 
-best_parameters="-ranker 8 -bag 100 -tree 15 -leaf 15";
-
-
-# ----------------- Create fold list
-/bin/bash $BINDIR/bin/make_folds.sh $trainFile $folds
+best_parameters="-ranker 8 -bag 50 -tree 20 -leaf 10";
 
 
 # ----------------- Train/valid RR models
 mkdir -p $modelsdir
 
-if [[ $TuneMLR = Yes ]]; then
+if [[ $MLR_Tune = "Yes" ]]; then
   printf "MLR parameter tuning ..."
-  for bg in 50 100 150; do
+  for bg in 10 50 100 300; do
   for tr in 5 10 20; do
-  for lf in 10 15 20; do
+  for lf in 5 10 20; do
     printf "%sranker %d %sbag %d %stree %d %sleaf %d " - $type - $bg - $tr - $lf
-    for fld in $(seq 1 $folds);  do
-      java -jar  $RANKLIBDIR/RankLib-2.6.jar -train $BASEDIR/temp/folds/fold_${fld}_train.data -validate $BASEDIR/temp/folds/fold_${fld}_test.data \
-                                         -ranker $type -bag $bg -tree $tr -leaf $lf \
-                                         -srate 0.5 -shrinkage 0.8 -tc 256 -mls 5  \
-                                         -metric2t NDCG@${CHANNELS} -metric2T NDCG@${CHANNELS}  2>&1 | grep "NDCG@${CHANNELS} on validation data:" | awk '{print $NF}'
-                                                                             
-    done | awk '{n++; sum+=$1} END {print sum/n}'
+    java -jar  $RANKLIBDIR/RankLib-2.6.jar -train $trainFile \
+                                           -ranker $type -bag $bg -tree $tr -leaf $lf \
+                                           -srate 0.1 -frate 0.5 -shrinkage 0.5 -tc 1 -mls 10  \
+			                   -kcv $folds -norm zscore \
+                                           -metric2t NDCG@${CHANNELS} -metric2T NDCG@${CHANNELS}  2>&1 | grep "Total" | awk '{print $NF}'                                                                       
   done
   done
   done > $BASEDIR/temp/MLR/train.log
@@ -36,16 +30,17 @@ if [[ $TuneMLR = Yes ]]; then
 fi
 
 
-printf "\nTrain MLR models on \"$trainFile\"..."
-trainData=$BASEDIR/temp/folds/shuffled_train.data
+printf "\nTrain MLR models on \"$trainFile\" with best parameters of \"$best_parameters\" ..."
+trainData=$trainFile #$BASEDIR/temp/folds/shuffled_train.data
 java -jar  $RANKLIBDIR/RankLib-2.6.jar  -train $trainData  \
-                                    $best_parameters \
-                                    -srate 0.5 -shrinkage 0.8 -tc 256 -mls 5  \
-                                    -metric2t NDCG@${CHANNELS} -save  $modelsdir/MLR.model   2>&1 | grep WriteNothing
+                                        $best_parameters \
+                                        -srate 0.1 -frate 0.5 -shrinkage 0.5 -tc 1 -mls 10  \
+					-norm zscore \
+                                        -metric2t NDCG@${CHANNELS} -save  $modelsdir/MLR.model   2>&1 | grep WriteNothing
 
 printf "done\n"                            
 
 # --------------- Test on Train
 
 . $BINDIR/MLR-QE/MLR_test.sh $trainFile $modelsdir $BASEDIR/temp/MLR/train.prank
-                                          
+
