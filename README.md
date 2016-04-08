@@ -1,10 +1,11 @@
 # TranscRater: Transcription Rating Toolkit
 An open-source tool for  automatic speech recognition (ASR) quality estimation (QE)
 
-#### Description
-This package contains two main modules: feature extraction and QE purpose machine learning. 
+### Description
+The tool, allows performing ASR evaluation bypassing the need of reference transcripts and confidence information, which is common to current assessment protocols.
+TranscRater consists of two main modules: feature extraction and QE purpose machine learning. 
 
-#### Requirements
+### Requirements
 The requirments for machine learning module:
 - Linux OS
 - "Python" > v2.7
@@ -19,7 +20,7 @@ The requirments for feature extraction:
 - "SRILM" n-gram language model toolkit
 - "TreeTagger" part-of-speech tagging toolkit
 
-#### Installation:
+### Installation:
 The toolkit by itself does not need any installation nor compile. The user needs to download and compile the aforementioned requirments and modify the following environment variables at the top of the configuration file:
 
 - OPENSMILEDIR= the directory of OpenSmile lib
@@ -28,7 +29,7 @@ The toolkit by itself does not need any installation nor compile. The user needs
 - TREETAGDIR= the directory of TreeTagger
 - RANKLIBDIR= the directory of RankLib
 
-#### Usage:
+### Usage:
 To see the first output of the system with regression models, in the root directory of the package, run the following command:
 ```
 ~/TranscRater> . fast_run_RR.sh
@@ -59,7 +60,7 @@ This script will:
 ```
 For a complete process on a real data set, starting from transcripts and feature extraction please go to "./egs/CHiME3/" directory where we use the data this corpora to train and test the ASR QE models. 
 
-# Contacts
+### Contacts
 [Shahab Jalalvand](https://hlt-mt.fbk.eu/people/profile/jalalvand), Fondazione Bruno Kessler, Italy (jalalvand@fbk.eu)
 
 [Matteo Negri](http://hlt-mt.fbk.eu/people/profile/negri), Fondazione Bruno Kessler, Italy (negri@fbk.eu)
