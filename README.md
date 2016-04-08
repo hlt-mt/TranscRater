@@ -58,7 +58,7 @@ This script will:
 5. save the predicted ranks on "data/MLR_output.prank.rank"
 6. show NDCG on the test data
 ```
-For a complete process on a real data set, starting from transcripts and feature extraction please go to "./egs/CHiME3/" directory where we use the data this corpora to train and test the ASR QE models. 
+For a complete process on a real data set, starting from transcripts and feature extraction please go to "./egs/CHiME3/" directory where we use the data of the 3rd CHiME challenge train and test the ASR QE models. 
 
 ### Contacts
 [Shahab Jalalvand](https://hlt-mt.fbk.eu/people/profile/jalalvand), Fondazione Bruno Kessler, Italy (jalalvand@fbk.eu)
