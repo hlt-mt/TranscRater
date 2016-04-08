@@ -3,7 +3,7 @@
 
 export BINDIR=`pwd`
 export BASEDIR=`pwd`
-export RANKLIBDIR=/home/jalalvand/Desktop/toolkits/RankLib-v2.1/bin # in order to use MLR models you need to have RankLib library 
+export RANKLIBDIR=/home/jalalvand/Downloads in order to use MLR models you need to have RankLib library 
 
 if [ ! -e $RANKLIBDIR/RankLib-2.6.jar ];then
   printf "ERROR!!! RankLib library not found in \"$RANKLIBDIR\"\n"
