@@ -8,8 +8,6 @@
 # 1)
 # set the inputs and paths for the framework, libraries and the models
 
-export BINDIR=/home/jalalvand/Desktop/ASR-QE-toolkit
-
 configfile=$1
 
 if [[ $configfile = "" ]] || [[ ! -e $configfile ]]; then
@@ -17,6 +15,7 @@ if [[ $configfile = "" ]] || [[ ! -e $configfile ]]; then
   return
 fi
 
+. $configfile
 . $BINDIR/bin/run_config.sh $configfile
 
 
