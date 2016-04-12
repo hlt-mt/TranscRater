@@ -7,9 +7,10 @@ Training and test respectively contain 1,640 and 1,320 sentences.
 
 ### Fast Run
 To run the toolkit fastly without using signal features (SIG), set the following variables in "./configuration1.conf" file:
+```
 BASEDIR= the full path of the directory of CHiME3 exsample on your computer.
 BINDIR= the full path of the directory of "TranscRater" directory.
-
+```
 Then run the following command:
 ```
 time . ../../bin/run-QE.sh configuration1.conf
