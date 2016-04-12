@@ -35,6 +35,7 @@ The transcriptions of the frontal microphones (1st, 3rd, 4th, 5th and 6th) using
 - ./data/transcriptions/train_CH_4.txt
 - ./data/transcriptions/train_CH_5.txt
 - ./data/transcriptions/train_CH_6.txt
+
 and
 - ./data/transcriptions/test_CH_1.txt
 - ./data/transcriptions/test_CH_3.txt
