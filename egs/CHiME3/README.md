@@ -1,4 +1,4 @@
-## CHiME3 example with 5 microphone
+## CHiME3: An example with 5 microphone
 
 For this example, we use  data from the 3rd CHiME challenge (http://spandh.dcs.shef.ac.uk/chime_challenge/chime2015/data.html) which were collected for multiple distant microphone speech recognition in noisy environments.
 CHiME-3 data consists of sentences of the Wall Street Journal corpus, uttered by four speakers in four noisy environments, and recorded by five frontal microphones placed on the frame of a tablet PC (a sixth one, placed on the back, mainly records background noise). 
@@ -7,16 +7,15 @@ Training and test respectively contain 1,640 and 1,320 sentences.
 
 ### Fast Run
 To run the toolkit fastly without using signal features (SIG), set the following variables in "./configuration1.conf" file:
-```
 BASEDIR= the full path of the directory of CHiME3 exsample on your computer.
 BINDIR= the full path of the directory of "TranscRater" directory.
-```
+
 Then run the following command:
 ```
 time . ../../bin/run-QE.sh configuration1.conf
 ```
 
-Afterwards, change the QE=RR variable to QE=MLR and then run:
+Change the QE=RR variable to QE=MLR and then run:
 ```
 time . ../../bin/run-QE.sh configuration1.conf
 ```
@@ -36,13 +35,14 @@ The transcriptions of the frontal microphones (1st, 3rd, 4th, 5th and 6th) using
 - ./data/transcriptions/train_CH_4.txt
 - ./data/transcriptions/train_CH_5.txt
 - ./data/transcriptions/train_CH_6.txt
-
+and
 - ./data/transcriptions/test_CH_1.txt
 - ./data/transcriptions/test_CH_3.txt
 - ./data/transcriptions/test_CH_4.txt
 - ./data/transcriptions/test_CH_5.txt
 - ./data/transcriptions/test_CH_6.txt
 
+### Using SIG features
 
 In order to use the signal based features, the user needs to download the audio data from (http://spandh.dcs.shef.ac.uk/chime_challenge/chime_download.html) and provides a list of the audio files (full path) in a file and put the name of this list in the corresponding field in the configuration file. 
 
@@ -84,3 +84,7 @@ find ${CHDIR}/data/audio/16kHz/isolated/et05_*/${id}.CH${Mic}.wav
 done > ./data/lists/test_CH_${Mic}.list
 ```
 
+Then run the following command:
+```
+time . ../../bin/run-QE.sh configuration2.conf
+```
