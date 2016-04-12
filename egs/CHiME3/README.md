@@ -1,73 +1,85 @@
-# TranscRater: Transcription Rating Toolkit
-An open-source tool for  automatic speech recognition (ASR) quality estimation (QE)
+## CHiME3 example with 5 microphone
 
-### Description
-The tool, allows performing ASR evaluation bypassing the need of reference transcripts and confidence information, which is common to current assessment protocols.
-TranscRater consists of two main modules: feature extraction and QE purpose machine learning. 
+For this example, we use  data from the 3rd CHiME challenge (http://spandh.dcs.shef.ac.uk/chime_challenge/chime2015/data.html) which were collected for multiple distant microphone speech recognition in noisy environments.
+CHiME-3 data consists of sentences of the Wall Street Journal corpus, uttered by four speakers in four noisy environments, and recorded by five frontal microphones placed on the frame of a tablet PC (a sixth one, placed on the back, mainly records background noise). 
+Training and test respectively contain 1,640 and 1,320 sentences. 
 
-### Requirements
-The requirments for machine learning module:
-- Linux OS
-- "Python" > v2.7
-- "SciPy" 
-- "sklearn" python library (http://scikit-learn.org/stable/install.html)
-- java > v1.8 (http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
-- "RankLib" v2.6 (https://sourceforge.net/projects/lemur/files/lemur/RankLib-2.6/RankLib-2.6.jar/download)
 
-The requirments for feature extraction:
-- "OpenSmile" signal processing toolkit (http://www.audeering.com/research/opensmile#download)
-- "RNNLM" recurrent neural network language model toolkit (http://www.fit.vutbr.cz/~imikolov/rnnlm/rnnlm-0.3e.tgz)
-- "SRILM" n-gram language model toolkit (http://www.speech.sri.com/projects/srilm/download.html)
-- "TreeTagger" part-of-speech tagging toolkit (http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/tree-tagger-linux-3.2.tar.gz)
+### Fast Run
+To run the toolkit fastly without using signal features (SIG), set the following variables in "./configuration1.conf" file:
+BASEDIR= the full path of the directory of CHiME3 exsample on your computer.
+BINDIR= the full path of the directory of "TranscRater" directory.
 
-### Installation:
-The toolkit by itself does not need any installation nor compile. The user needs to download and compile the aforementioned requirments and modify the following environment variables at the top of the configuration file:
-
-- OPENSMILEDIR= the directory of OpenSmile lib
-- RNNLMDIR= the directory of RNNLM
-- SRILMDIR= the directory of SRILM
-- TREETAGDIR= the directory of TreeTagger
-- RANKLIBDIR= the directory of RankLib
-
-### Usage:
-To see the first output of the system with regression models, in the root directory of the package, run the following command:
+Then run the following command:
 ```
-~/TranscRater> . fast_run_RR.sh
+time . ../../bin/run-QE.sh configuration1.conf
 ```
 
-This script will:
+Change the QE=RR variable to QE=MLR and then run:
 ```
-1. use the data "./data/RR_train_LEX_LM_POS.data" to train a regression (RR) model,
-2. save it into "./RR_Models/"
-3. show mean absolute error (MAE) and normalized discounted cumulative gain (NDCG) on the training data
-4. use the trained model to predict the WER of the "./data/RR_test_LEX_LM_POS.data"
-5. save the predicted WER on "./data/RR_output.pwer" and the predicted ranks on "data/RR_output.pwer.rank"
-6. show MAE and NDCG on the test data
+time . ../../bin/run-QE.sh configuration1.conf
 ```
 
-To see the first output of the system with machine-learned ranking (MLR) models, first download "RankLib-2.6.jar" and set its path in "./fast_run_MLR.sh" in the root directory of the package and then run the following command:
+## Descriptions
+
+The "./data/" directory includes the references for for the training and test sets:
 ```
-~/TranscRater> . fast_run_MLR.sh
+cat ./data/train.ref
+cat ./data/test.ref
 ```
-This script will:
+
+The transcriptions of the frontal microphones (1st, 3rd, 4th, 5th and 6th) using the baseline ASR system are also provided "./data/transcriptions/":
+
+- ./data/transcriptions/train_CH_1.txt
+- ./data/transcriptions/train_CH_3.txt
+- ./data/transcriptions/train_CH_4.txt
+- ./data/transcriptions/train_CH_5.txt
+- ./data/transcriptions/train_CH_6.txt
+
+- ./data/transcriptions/test_CH_1.txt
+- ./data/transcriptions/test_CH_3.txt
+- ./data/transcriptions/test_CH_4.txt
+- ./data/transcriptions/test_CH_5.txt
+- ./data/transcriptions/test_CH_6.txt
+
+
+In order to use the signal based features, the user needs to download the audio data from (http://spandh.dcs.shef.ac.uk/chime_challenge/chime_download.html) and provides a list of the audio files (full path) in a file and put the name of this list in the corresponding field in the configuration file. 
+
+To do so:
+1. item click on the link above
+2. download "CHiME3_isolated_dt05_real"
+3. select "CHiME3_isolated_dt05_real.zip" option and click on download
+4. unzip the file and save the path to this folder
+
+
+Follow the same procedure to download the evaluation set by selecting "CHiME3_isolated_et05_real" and then "CHiME3_isolated_et05_real.zip". 
+Again the transcriptions of these audio files by the baseline ASR systems are provided in "./data/transcriptions/test_CH_i.txt".
+
+
+After downloading the audio files the user needs to prepare a list file for each microphone, in the same order as the reference files. 
+For example, if the unzipped file is in 
 ```
-1. use the data "./data/MLR_train_LEX_LM_POS.data" to train a regression model,
-2. save it into "./MLR_Models/"
-3. show NDCG on the training data
-4. use the trained model to predict the ranks on "./data/MLR_test_LEX_LM_POS.data"
-5. save the predicted ranks on "data/MLR_output.prank.rank"
-6. show NDCG on the test data
+CHDIR=/home/jalalvand/Downloads/CHiME3
 ```
-For a complete process on a real data set, starting from transcripts and feature extraction please go to "./egs/CHiME3/" directory where we use the data of the 3rd CHiME challenge train and test the ASR QE models. 
+then one can use the following bash command to make the audio list file for each microphone:
+```
+TranscRater> for Mic in 1 3 4 5 6; do
+cat data/train.ref | cut -d" " -f1 | 
+sed "s/_real//g" | tr "[:lower:]" "[:upper:]"|
+while read id; do 
+find ${CHDIR}/data/audio/16kHz/isolated/dt05_*/${id}.CH${Mic}.wav 
+done > ./data/lists/train_CH_${Mic}.list
+```
 
-### Contacts
-[Shahab Jalalvand](https://hlt-mt.fbk.eu/people/profile/jalalvand), Fondazione Bruno Kessler, Italy (jalalvand@fbk.eu)
+Note that we won't use the second microphone as it is placed on the back side of the tablet device and it mostly captures the noise.
 
-[Matteo Negri](http://hlt-mt.fbk.eu/people/profile/negri), Fondazione Bruno Kessler, Italy (negri@fbk.eu)
-
-[Marco Turchi](http://hlt-mt.fbk.eu/people/profile/turchi), Fondazione Bruno Kesler, Italy (turchi@fbk.eu)
-
-[Daniele Falavigna](http://hlt-mt.fbk.eu/people/profile/falavi), Fondazione Bruno Kesler, Italy (falavi@fbk.eu)
-
-
+The same command can be used for the evaluation set:
+```
+TranscRater> for Mic in 1 3 4 5 6; do
+cat data/test.ref | cut -d" " -f1 | 
+sed "s/_real//g" | tr "[:lower:]" "[:upper:]"|
+while read id; do 
+find ${CHDIR}/data/audio/16kHz/isolated/et05_*/${id}.CH${Mic}.wav 
+done > ./data/lists/test_CH_${Mic}.list
+```
 
