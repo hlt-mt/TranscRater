@@ -16,7 +16,7 @@ Then run the following command:
 time . ../../bin/run-QE.sh configuration1.conf
 ```
 
-Change the QE=RR variable to QE=MLR and then run:
+Afterwards, change the QE=RR variable to QE=MLR and then run:
 ```
 time . ../../bin/run-QE.sh configuration1.conf
 ```
