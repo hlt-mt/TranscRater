@@ -11,7 +11,7 @@ The requirments for machine learning module:
 - "Python" > v2.7
 - "SciPy" 
 - "sklearn" python library (http://scikit-learn.org/stable/install.html)
-- java > v1.8 (http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
+- java v1.8 (http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
 - "RankLib" v2.6 (https://sourceforge.net/projects/lemur/files/lemur/RankLib-2.6/RankLib-2.6.jar/download)
 
 The requirments for feature extraction:
