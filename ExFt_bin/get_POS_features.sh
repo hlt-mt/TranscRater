@@ -28,7 +28,7 @@ do
   cat  ${transcChannels[$((ch-1))]} | cut -d' ' -f2- | sed 's/<unk>/kioonia/g' | sed 's/$/ #/g' | tr ' ' '\n'             
 done > $BASEDIR/temp/${setname}_all_POS.txt 
 
-cat $BASEDIR/temp/${setname}_all_POS.txt | $TREETAGDIR/tree-tagger $BINDIR/AUXILIARY/english.par -quiet -token -lemma -sgml -prob -threshold 0.001 \
+cat $BASEDIR/temp/${setname}_all_POS.txt | $TREETAGDIR/tree-tagger $BINDIR/AUXFILE/english.par -quiet -token -lemma -sgml -prob -threshold 0.001 \
                                          | awk '{print $1,$2,$4}' > $BASEDIR/temp/${setname}_all_POS
 
 python $BINDIR/ExFt_bin/POS_feature.py $BASEDIR $setname $BASEDIR/temp/${setname}_all_POS
