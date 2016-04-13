@@ -30,7 +30,7 @@ if [[ $setname = "train" ]]; then
   done
 
   paste $tmpstr | tr '\t' ' ' | tr ' ' '\n' > $BASEDIR/temp/wer2rank_array
-  python $BINDIR/bin/rank_array.py $BASEDIR/temp/wer2rank_array $CHANNELS $BASEDIR/data/features/${setname}.rankank
+  python $BINDIR/bin/rank_array.py $BASEDIR/temp/wer2rank_array $CHANNELS $BASEDIR/data/features/${setname}.rank
 
   for ch in $(seq 1 $CHANNELS)
   do
