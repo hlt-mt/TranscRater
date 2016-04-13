@@ -26,7 +26,7 @@ do
   i=$(($i+1))
 done < $BASEDIR/temp/refid
 
-
+chmod 777 $BINDIR/bin/levenshtein
 $BINDIR/bin/levenshtein $reffile $txtfile | head -n -1 | awk '{printf("%.3f\n",$NF/100)}' > $outfile
 
 printf "done\n"
