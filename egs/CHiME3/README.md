@@ -10,6 +10,9 @@ To run the toolkit fastly without using signal features (SIG), set the following
 ```
 BASEDIR= the full path of the directory of CHiME3 exsample on your computer.
 BINDIR= the full path of the directory of "TranscRater" directory.
+SRILMDIR= the full path of the directory of SRILM
+TREETAGDIR= the full path of the directory of TREETAGGER
+RANKLIBDIR= the full path of the directory of RankLib-2.6.jar
 ```
 Then run the following command:
 ```
