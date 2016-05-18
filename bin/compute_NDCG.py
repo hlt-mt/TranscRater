@@ -57,7 +57,7 @@ for k in range(true_rank_mat.shape[0]):
 #  print  (dcg / idcg)
   ndcg.append( dcg / idcg )
   
-print np.mean(ndcg)*100
+print "%.3f" % np.mean(ndcg)*100
 
 
 
