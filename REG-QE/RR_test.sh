@@ -19,8 +19,7 @@ then
   return
 fi
 
-MAE=`python $BINDIR/bin/compute_MAE.py $testFile $outfile`
-printf "MAE: %.3f\n" $MAE
+python $BINDIR/bin/compute_MAE.py $testFile $outfile
 
 
 
@@ -30,8 +29,7 @@ then
   python $BINDIR/bin/rank_array.py $BASEDIR/temp/RR/test.label $CHANNELS $BASEDIR/temp/RR/test.label.rank
   python $BINDIR/bin/rank_array.py $outfile $CHANNELS ${outfile}.rank
 
-  NDCG=`python $BINDIR/bin/compute_NDCG.py  $BASEDIR/temp/RR/test.label.rank ${outfile}.rank`
-  printf "NDCG: %.3f\n" $NDCG
+  python $BINDIR/bin/compute_NDCG.py  $BASEDIR/temp/RR/test.label.rank ${outfile}.rank
 
 fi
 
