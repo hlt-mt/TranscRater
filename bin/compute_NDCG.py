@@ -34,14 +34,6 @@ for k in range(true_rank_mat.shape[0]):
   trtmp = true_rank_mat.shape[1] - true_rank_mat[k][true_rank_mat[k].ravel().argsort()] + 1
   prtmp = true_rank_mat.shape[1] - pred_rank_mat[k][true_rank_mat[k].ravel().argsort()] + 1
 
-#  idcg = trtmp[0]
-#  for i in range(1,true_rank_mat.shape[1]):
-#    idcg += ( trtmp[i] / math.log(i+1,2) )
- 
-#  dcg = prtmp[0]
-#  for i in range(1,pred_rank_mat.shape[1]):
-#    dcg += ( prtmp[i] / math.log(i+1,2) )
-
   idcg = 0
   i=1
   for elem in trtmp:
@@ -57,7 +49,7 @@ for k in range(true_rank_mat.shape[0]):
 #  print  (dcg / idcg)
   ndcg.append( dcg / idcg )
   
-print "%.3f" % np.mean(ndcg)*100
+print "NDCG: %.3f" % np.mean(ndcg*100)
 
 
 

@@ -26,5 +26,5 @@ if ( test_file_mat.shape[0] != pred_wer.shape[0] ):
   print "Error!!! Mismatch between True and Predicted WER files shape"
   exit()
 else:
-  print "%.3f" % np.mean( abs( test_file_mat[:,0] - pred_wer ) )
+  print "MAE: %.3f" % np.mean( abs( test_file_mat[:,0] - pred_wer ) )
 
