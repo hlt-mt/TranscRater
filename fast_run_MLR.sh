@@ -5,10 +5,9 @@ export BINDIR=`pwd`
 export BASEDIR=`pwd`
 export RANKLIBDIR=/home/jalalvand/Downloads  # in order to use MLR models you need to have RankLib library 
 
-if [ ! -e $RANKLIBDIR/RankLib-2.6.jar ];then
-  printf "ERROR!!! RankLib library not found in \"$RANKLIBDIR\"\n"
-  return
-fi
+
+. $BINDIR/control_libraries.sh
+
 
 export CHANNELS=5  # Since there are 5 transcription channels in the data files
 

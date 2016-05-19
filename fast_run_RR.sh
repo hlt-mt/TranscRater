@@ -5,6 +5,9 @@ export BINDIR=`pwd`
 export BASEDIR=`pwd`
 
 
+. $BINDIR/control_libraries.sh
+
+
 export CHANNELS=5  # Since there are 5 transcription channels in the data files
 
 
