@@ -2,6 +2,11 @@
 
 inputfile=$1
 
+if [[ $inputfile = "" ]] || [ ! -e $inputfile ]; then
+  printf "ERORR!!! configuration file is not defined\n"
+  return
+fi
+
 cat $inputfile | awk '{ if( index($L,"=") >0 && index($L,"#") != 1 ) print "export",$L; else print $L }' > ${inputfile}.exp
 
 . ${inputfile}.exp
@@ -97,7 +102,7 @@ if [ $F_SIG = 1 ]; then
 fi
 
 
-# Machine Learninig
-
+# Control the libraries
+. $BINDIR/control_libraries.sh
 
       
