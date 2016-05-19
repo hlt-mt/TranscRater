@@ -6,7 +6,7 @@ export BASEDIR=`pwd`
 export RANKLIBDIR=/home/jalalvand/Downloads  # in order to use MLR models you need to have RankLib library 
 
 
-. $BINDIR/control_libraries.sh
+. $BINDIR/bin/control_libraries.sh
 
 
 export CHANNELS=5  # Since there are 5 transcription channels in the data files
