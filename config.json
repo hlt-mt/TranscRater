@@ -1,13 +1,13 @@
 {
 
-"BASEDIR":"`pwd`",
-"BINDIR":"$BASEDIR/../..",
+"BASEDIR":".",
+"BINDIR":".",
 
 "OPENSMILEDIR":"/home/jalalvand/Desktop/toolkits/signal_feature_tools/opensmile-2.0-rc1/opensmile",
 "RNNLMDIR":"/home/jalalvand/Desktop/rnnlm/rnnlm-0.3e",  
 "SRILMDIR":"/home/jalalvand/Desktop/srilm/bin/i686-m64", 
 "TREETAGDIR":"/home/jalalvand/Desktop/fbk_functions/TreeTagger/bin", 
-"RANKLIBDIR":"/home/jalalvand/Downloads",  
+"RANKLIBDIR":"./",  
 
 "RNNLM1":"$BASEDIR/lm/rnnlm11M ",
 "RNNLM2":"$BASEDIR/lm/rnnlm1M",
@@ -17,7 +17,7 @@
 "LEXFEAT":"$BINDIR/AUXFILE/LexicalFeatures.txt",
 
 "trainREF":"$BASEDIR/data/train.ref",
-"train_transcChannels":"($BASEDIR/data/transcriptions/train_CH_1.txt $BASEDIR/data/transcriptions/train_CH_3.txt $BASEDIR/data/transcriptions/train_CH_4.txt $BASEDIR/data/transcriptions/train_CH_5.txt $BASEDIR/data/transcriptions/train_CH_6.txt)",
+"train_transcChannels":"test/data/train_CH_1.txt test/train_CH_2.txt test/train_CH_3.txt test/train_CH_4.txt test/train_CH_5.txt",
 
 "testREF":"$BASEDIR/data/test.ref",
 "test_transcChannels":"($BASEDIR/data/transcriptions/test_CH_1.txt $BASEDIR/data/transcriptions/test_CH_3.txt $BASEDIR/data/transcriptions/test_CH_4.txt $BASEDIR/data/transcriptions/test_CH_5.txt $BASEDIR/data/transcriptions/test_CH_6.txt)",

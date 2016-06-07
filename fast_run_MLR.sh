@@ -3,7 +3,7 @@
 
 export BINDIR=`pwd`
 export BASEDIR=`pwd`
-export RANKLIBDIR=/home/jalalvand/Downloads  # in order to use MLR models you need to have RankLib library 
+export RANKLIBDIR=/Users/qwaider/Documents/LiClipse-Workspace/mine/src/main  # in order to use MLR models you need to have RankLib library 
 
 
 . $BINDIR/bin/control_libraries.sh
