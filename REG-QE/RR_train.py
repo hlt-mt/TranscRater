@@ -10,6 +10,11 @@ from __main__ import *
 
 def main ( traindatadir, modelsdir ):
   
+  if not os.path.exists( traindatadir ):
+    print "ERROR!!! train data directory \""+traindatadir+"\" not found"
+    return  
+  if not os.path.exists( modelsdir ):
+    os.makedirs( modelsdir )  
   if not os.path.exists( BASEDIR+"/temp/RR" ):
     os.makedirs( BASEDIR+"/temp/RR" )
   if not os.path.exists( BASEDIR+"/results" ):

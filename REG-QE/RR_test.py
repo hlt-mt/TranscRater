@@ -8,6 +8,12 @@ from __main__ import *
 
 def main ( testdatadir, modelsdir ):
 
+  if not os.path.exists( testdatadir ):
+    print "ERROR!!! test data directory \""+testdatadir+"\" not found"
+    return
+  if not os.path.exists( modelsdir ):
+    print "ERROR!!! model directory \""+modelsdir+"\" not found"
+    return
   if not os.path.exists( BASEDIR+"/temp/RR" ):
     os.makedirs( BASEDIR+"/temp/RR" )
   if not os.path.exists( BASEDIR+"/temp/RR/test_label" ):
