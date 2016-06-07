@@ -2,37 +2,31 @@
 
 import argparse
 import math
+import sys
 import numpy as np
-from sys import *
+
+from __main__ import *
+
+def main(in_mat):
+
+  ovlrank = np.argsort(np.mean(in_mat,axis=0))
+
+  mat2 = np.zeros(in_mat.shape)
+  for ind in range(in_mat.shape[1]):
+    mat2[:,ind] = in_mat[:,ovlrank[ind]]
+
+  mat3 = mat2.argsort().argsort()
+
+  out_mat = np.zeros(in_mat.shape)
+  for ind in range(in_mat.shape[1]):
+    out_mat[:,ovlrank[ind]] = mat3[:,ind]
+    
+  return out_mat+1
 
 
-
-infile = argv[1]
-channels = int(argv[2])
-outfile = argv[3]
-
+if __name__=='__main__':
+  sys.exit(sys.argv[1])
+      
 
 
-
-if ( infile == "" or channels < 1 or outfile == "" ):
-        print "\nERROR!!! Wrong input to \"rank_array.py\"\n"
-
-scores_array = np.nan_to_num(np.genfromtxt(infile,delimiter=' '))
-
-mat = scores_array.reshape(scores_array.shape[0]/channels,channels)
-
-ovlrank = np.argsort(np.mean(mat,axis=0))
-
-mat2 = np.zeros(mat.shape)
-for ind in range(mat.shape[1]):
-  mat2[:,ind] = mat[:,ovlrank[ind]]
-
-mat3 = mat2.argsort().argsort()
-
-finmat = np.zeros(mat.shape)
-for ind in range(mat.shape[1]):
-  finmat[:,ovlrank[ind]] = mat3[:,ind]
-  
-np.savetxt(outfile, finmat+1 , fmt='%d')
-  
 
