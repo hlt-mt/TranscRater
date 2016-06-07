@@ -14,7 +14,7 @@ def main(argv):
         print 'MLR_data.py -n <name>'
         sys.exit(2)
      setname="train"
-     Feat = "LEX"
+     Feat = readJson.config['FEAT']
      CHANNELS=readJson.config['train_transcChannels'].split(' ')
       
      try:
