@@ -1,5 +1,4 @@
 
-
 import sys
 
 import argparse
@@ -14,43 +13,38 @@ from sklearn.externals import joblib
 
 import numpy as np
 
-from tempfile import TemporaryFile
+from __main__ import *
 
 
-if sys.argv[1]:
-  test_file = sys.argv[1]
-else:
-  print "Error!!! No input defined to be Qualified..."
+def main (test_feat, test_label, qe_models, outfile):
+
+  print "Test on %s ..." % test_feat
   
-if sys.argv[2]:
-  qe_models = sys.argv[2]
-else:
-  print "Error!!! No input defined to be Qualified..."
-if sys.argv[3]:
-  outfile = sys.argv[3]
-else:
-  print "Error!!! No output file defined..."
+  X_feat = np.nan_to_num(np.genfromtxt(test_feat, delimiter=' '))
+  X_label = np.nan_to_num(np.genfromtxt(test_label, delimiter=' '))
   
+  estimator2 = joblib.load(qe_models+"/XRT.pkl")
+  scaler = joblib.load(qe_models + "/scaler.pkl")
+  sel_est = joblib.load(qe_models + "/sel_est.pkl")
 
-X_test = np.nan_to_num(np.genfromtxt(test_file, delimiter=' '))
+  X_tests = X_feat
+  X_tests = scaler.transform(X_feat)
+  X_tests = sel_est.transform(X_tests)
+  y_pred = estimator2.predict(X_tests)
 
-estimator2 = joblib.load(qe_models+"/XRT.pkl")
-scaler = joblib.load(qe_models + "/scaler.pkl")
-sel_est = joblib.load(qe_models + "/sel_est.pkl")
-
-X_tests = X_test
-X_tests = scaler.transform(X_test)
-X_tests = sel_est.transform(X_tests)
-y_pred2= np.clip(estimator2.predict(X_tests), 0, 1)
-
-#mae2 = mean_absolute_error(y_test, y_pred2)
-#print "Pred2 MAE = %2.8f" % mae2
-
-#print "Predicated WER: ", y_pred2
-
-fout = open(outfile,'w')
-for elem in y_pred2:
-  fout.write("%.3f\n" % elem)
-fout.close()
-
-	
+  
+  print "MAE : %.3f" % mean_absolute_error(X_label, y_pred)
+  np.savetxt( outfile, y_pred , fmt='%.3f') 
+  
+  if CHANNELS > 1:
+    import rank_array
+    true_rank_mat =      rank_array.main( X_label.reshape([X_label.shape[0]/CHANNELS, CHANNELS]) ) 
+    pred_rank_mat = rank_array.main( y_pred.reshape([y_pred.shape[0]/CHANNELS, CHANNELS]) )
+    import compute_NDCG
+    compute_NDCG.main(true_rank_mat, pred_rank_mat)
+  
+  
+if __name__=='__main__':
+  sys.exit(main(sys.argv[1], sys.argv[2],sys.argv[3]))
+  
+  	
