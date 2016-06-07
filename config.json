@@ -1,0 +1,40 @@
+{
+
+"BASEDIR":".",
+"BINDIR":".",
+
+"OPENSMILEDIR":"/home/jalalvand/Desktop/toolkits/signal_feature_tools/opensmile-2.0-rc1/opensmile",
+"RNNLMDIR":"/home/jalalvand/Desktop/rnnlm/rnnlm-0.3e",  
+"SRILMDIR":"/home/jalalvand/Desktop/srilm/bin/i686-m64", 
+"TREETAGDIR":"/home/jalalvand/Desktop/fbk_functions/TreeTagger/bin", 
+"RANKLIBDIR":"./",  
+
+"RNNLM1":"$BASEDIR/lm/rnnlm11M ",
+"RNNLM2":"$BASEDIR/lm/rnnlm1M",
+"SRILM1":"$BASEDIR/lm/srilm37M_4gr.blm ",
+"SRILM2":"$BASEDIR/lm/srilm1M_4gr.blm",
+
+"LEXFEAT":"$BINDIR/AUXFILE/LexicalFeatures.txt",
+
+"trainREF":"$BASEDIR/data/train.ref",
+"train_transcChannels":"test/data/train_CH_1.txt test/train_CH_2.txt test/train_CH_3.txt test/train_CH_4.txt test/train_CH_5.txt",
+
+"testREF":"$BASEDIR/data/test.ref",
+"test_transcChannels":"($BASEDIR/data/transcriptions/test_CH_1.txt $BASEDIR/data/transcriptions/test_CH_3.txt $BASEDIR/data/transcriptions/test_CH_4.txt $BASEDIR/data/transcriptions/test_CH_5.txt $BASEDIR/data/transcriptions/test_CH_6.txt)",
+
+"MICROPHONES":"5",
+"ASR_SYSTEMS":"1",
+
+"folds":"5",
+
+"QE":"RR",
+"RR_Iter":"100",                
+"MLR_Tune":"No",
+
+"F_SIG":"0", 
+"F_LM":"1", 
+"F_POS":"1", 
+"F_LEX":"1"  
+
+}
+
