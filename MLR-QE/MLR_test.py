@@ -3,69 +3,12 @@ Created on May 31, 2016
 
 @author: qwaider
 '''
+from __future__ import division
 import sys, getopt, os
-import readJson
+from __main__ import config
 import subprocess
-def main(argv):
-    if len(sys.argv) < 0 :
-            print 'MLR_test.py -t <testfile> -o <outputfile> -m <modelsdir> -c <channels>'
-            sys.exit(2)
-      
-    testFile = ''
-    modelsdir = ''
-    outfile = ''
-    #CHANNELS = readJson.config['train_transcChannels'].split(' ')
-    CHANNELS="5"
-      
-      
-    try:
-          opts, args = getopt.getopt(argv, "ht:o:m:c:", ["testfile=", "outputfile=", "modelsdir=","channel="])
-    except getopt.GetoptError:
-          print 'MLR_test.py -t <testfile> -o <outputfile> -m <modelsdir> -c <channels>'
-          sys.exit(2)
-    for opt, arg in opts:
-          if opt == '-h':
-             print 'MLR_test.py -t <testfile> -o <outputfile> -m <modelsdir> -c <channels>'
-             sys.exit()
-          elif opt in ("-t", "--testfile"):
-             testFile = arg
-          elif opt in ("-o", "--outputfile"):
-             outfile = arg
-          elif opt in ("-m", "--modelsdir"):
-             modelsdir = arg
-          elif opt in ("-c", "--channel"):
-             CHANNELS = arg
-    print "\nTest \"" + modelsdir + "\" on \"" + testFile + "\"...\n"
-      # ----------------- Predict ranks
-      # cat $testFile | cut -d' ' -f 1 > $BASEDIR/temp/MLR/test.label
-    mkdir_p(readJson.config['BASEDIR'] + "/temp/MLR/")
-    f = open(readJson.config['BASEDIR'] + "/temp/MLR/test.label", 'w')
-    with open(testFile, 'r') as fin:
-          for line in fin:
-              line = line.split(' ')[0]
-              f.write(line + os.linesep)
-    f.close()
-    args = [readJson.config['RANKLIBDIR'] + "/RankLib-2.6.jar", "-load", modelsdir + "/MLR.model", "-rank", testFile, "-norm", "zscore", "-metric2T", "NDCG@"+CHANNELS, "-score", readJson.config['BASEDIR'] + "/temp/MLR/Scores"]  # TODO  2>&1 | grep WriteNothing
-    print subprocess.Popen('java -jar' + (''.join(list(str(" " + e) for e in args))), shell=True, stdout=subprocess.PIPE).stdout.read()
-    f = open(outfile, 'w')
-    with open(readJson.config['BASEDIR'] + "/temp/MLR/Scores", 'r') as fin:
-          for line in fin:  
-              line = "{0:.3f}".format(float(line.split('\t')[2]))  # TODO awk '{printf("%.3f\n", $NF)}' 
-              f.write(line + os.linesep)
-    f.close()
-      # ----------------- Compute NDCG
-    args = [readJson.config['BINDIR'] + "/bin/rank_array.py", readJson.config['BASEDIR'] + "/temp/MLR/test.label", CHANNELS, readJson.config['BASEDIR'] + "/temp/MLR/test.label.rank"]
-    print subprocess.Popen('python' + (''.join(list(str(" " + e) for e in args))), shell=True, stdout=subprocess.PIPE).stdout.read()
-    args = [readJson.config['BINDIR'] + "/bin/rank_array.py", outfile, CHANNELS, outfile + ".rank"]  # TODO ${outfile}.rank
-    print subprocess.Popen('python' + (''.join(list(str(" " + e) for e in args))), shell=True, stdout=subprocess.PIPE).stdout.read()
-    args = [readJson.config['BINDIR'] + "/bin/compute_NDCG.py", readJson.config['BASEDIR'] + "/temp/MLR/test.label.rank", outfile + ".rank"]  # TODO ${outfile}.rank
-    print subprocess.Popen('python' + (''.join(list(str(" " + e) for e in args))), shell=True, stdout=subprocess.PIPE).stdout.read()
-
-from subprocess import *
-
+import numpy as np
 import errno    
-import os
-from subprocess import *
 
 def mkdir_p(path):
     try:
@@ -76,8 +19,43 @@ def mkdir_p(path):
         else:
             raise   
    
-   
+
+def main(testFile,modelsdir,outfile):
+         
+  
+    print "\nTest \"" + modelsdir + "\" on \"" + testFile + "\"..."
+    
+    data_size = num_lines = sum(1 for line in open(testFile))
+
+    # load the labels
+    labels = np.array([])
+    with open(testFile, 'r') as fin:
+          for line in fin:
+              labels = np.append (labels, int(line.split(' ')[0]))
+    labels_rank_mat = labels.reshape([labels.shape[0]/int(config['CHANNELS']), int(config['CHANNELS'])])
+    
+    # predict the ranks
+    args = [config['RANKLIBDIR']+"/RankLib-2.6.jar", "-load", modelsdir+"/MLR.model",
+            "-rank", testFile, "-norm", "zscore", "-metric2T", "NDCG@"+config['CHANNELS'],
+            "-score", config['BASEDIR'] + "/temp/MLR/Scores 2>&1 | grep WriteNothing"]
+    subprocess.Popen('java -jar' + (''.join(list(str(" " + e) for e in args))), shell=True, stdout=subprocess.PIPE).stdout.read()
+
+    # load the predicted scores into a matrix
+    scores = np.array([])
+    with open(config['BASEDIR'] + "/temp/MLR/Scores", 'r') as fin:
+          for line in fin:  
+               scores = np.append( scores, "{0:.3f}".format(float(line.split('\t')[2])) ) 
+    scores_mat = scores.reshape([scores.shape[0]/int(config['CHANNELS']), int(config['CHANNELS'])]).astype(np.float)
+
+    import rank_array
+    pred_rank_mat = rank_array.main(scores_mat)
+
+     
+    # ----------------- Compute NDCG
+    import compute_NDCG
+    compute_NDCG.main ( labels_rank_mat, pred_rank_mat )
+    
    
 if __name__ == "__main__":
-   main(sys.argv)
+   main(sys.argv[1],sys.argv[2],sys.argv[3])
 
