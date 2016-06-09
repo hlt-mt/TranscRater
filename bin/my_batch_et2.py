@@ -2,6 +2,11 @@
 Created on Sep 17, 2013
 
 @author: desouza
+
+this code train the Extremely Randomized Tree regression models 
+on the training set and saves the models.
+
+
 '''
 import argparse
 import sys
