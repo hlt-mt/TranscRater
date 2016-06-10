@@ -55,7 +55,7 @@ def main ( traindatadir, modelsdir ):
   np.savetxt( trainFeat, data_feat , fmt='%.4f') 
 
   import my_batch_et2
-  my_batch_et2.main(trainLabel, trainFeat, modelsdir, 1, 10, 5)
+  my_batch_et2.main(trainLabel, trainFeat, modelsdir, 1)
 
   print "\nTest on Training set: "  
   import XRT_REG_test

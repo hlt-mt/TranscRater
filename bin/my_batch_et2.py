@@ -27,7 +27,7 @@ import yaml
 import numpy as np
 
 
-def main(train_label, train_feat, modelsdir, selfeat, iterations, folds):
+def main(train_label, train_feat, modelsdir, selfeat):
 
   X_train = np.nan_to_num(np.genfromtxt(train_feat, delimiter=' '))
   y_train = np.nan_to_num(np.genfromtxt(train_label, delimiter=' '))
@@ -43,7 +43,7 @@ def main(train_label, train_feat, modelsdir, selfeat, iterations, folds):
     print "Performing feature selection ..."
     # initializes selection estimator
     sel_est = RandomizedLasso(alpha="bic", verbose=True, max_iter=1000,
-                              n_jobs=8, random_state=42,
+                              n_jobs=int(nj), random_state=42,
                               n_resampling=1000)
   
     sel_est.fit(X_trains, y_train)
@@ -80,9 +80,9 @@ def main(train_label, train_feat, modelsdir, selfeat, iterations, folds):
    # "criterion": ["gini", "entropy"]}
 
   search = RandomizedSearchCV(estimator, param_distributions,
-            n_iter=int(iterations),
+            n_iter=int(config['RR_iter']),
             scoring=mae_scorer, n_jobs=8, refit=True,
-            cv=KFold(X_train.shape[0], int(folds), shuffle=True, random_state=42),
+            cv=KFold(X_train.shape[0], int(config['folds']), shuffle=True, random_state=42),
             verbose=1, random_state=42)
   
   # fits model using best parameters found
@@ -115,7 +115,7 @@ def main(train_label, train_feat, modelsdir, selfeat, iterations, folds):
 
 
 if __name__=='__main__':
-  sys.exit(main(sys.argv[1], sys.argv[2],sys.argv[3],sys.argv[4],sys.argv[5],sys.argv[6]))
+  sys.exit(main(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4]))
   
   
   

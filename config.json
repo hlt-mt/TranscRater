@@ -1,9 +1,9 @@
 {
 
-"BASEDIR":"/home/jalalvand/Desktop/TranscRater",
-"BINDIR":"/home/jalalvand/Desktop/TranscRater",
+"BASEDIR" : "/home/jalalvand/Desktop/TranscRater",
+"BINDIR" : "/home/jalalvand/Desktop/TranscRater",
 
-"RANKLIBDIR":"/home/jalalvand/Downloads",  
+"RANKLIBDIR" : "/home/jalalvand/Downloads",  
 
 "CHANNELS" : "5",
 
@@ -15,16 +15,18 @@
 "trainREF" : "data/train.ref",
 "train_transcChannels" : "data/train_CH_1.txt data/train_CH_2.txt data/train_CH_3.txt data/train_CH_4.txt data/train_CH_5.txt",
 
-"testREF":"data/test.ref",
+"testREF" : "data/test.ref",
 "test_transcChannels" : "data/test_CH_1.txt data/test_CH_2.txt data/test_CH_3.txt data/test_CH_4.txt data/test_CH_5.txt",
 
-"MICROPHONES":"5",
-"ASR_SYSTEMS":"1",
+"MICROPHONES" : "5",
+"ASR_SYSTEMS" : "1",
 
-"folds":"5",
+"folds" : "5",
 
-"QE":"MLR",
-"RR_Iter":"100",                
+"QE" : "MLR",
+"RR_Iter" : "10",
+"n_jobs" : "1",
+                
 "MLR_Tune":"No"
 
 }
