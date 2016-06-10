@@ -10,7 +10,7 @@ import json
 
 
 # include the commands directories
-BINDIR = os.getcwd()
+BINDIR = os.getcwd()  # dardesar
 sys.path.insert(0, BINDIR+"/bin")
 sys.path.insert(0, BINDIR+"/MLR-QE")
 
