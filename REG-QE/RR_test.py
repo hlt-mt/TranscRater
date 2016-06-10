@@ -5,7 +5,7 @@ import numpy as np
 from __main__ import config
 
 
-def main ( testdatadir, modelsdir ):
+def main ( testdatadir, modelsdir, out_file ):
 
   if not os.path.exists( testdatadir ):
     print "ERROR!!! test data directory \""+testdatadir+"\" not found"
@@ -19,12 +19,10 @@ def main ( testdatadir, modelsdir ):
     os.makedirs( config['BASEDIR']+"/temp/RR/test_label" )
   if not os.path.exists( config['BASEDIR']+"/temp/RR/test_feat" ):
     os.makedirs( config['BASEDIR']+"/temp/RR/test_feat" )
-  if not os.path.exists( config['BASEDIR']+"/results" ):
-    os.makedirs( config['BASEDIR']+"/results" )
     
   testLabel = config['BASEDIR']+"/temp/RR/test_label/test_label"
   testFeat = config['BASEDIR']+"/temp/RR/test_feat/test_feat"
-  resultsdir = config['BASEDIR']+"/results"
+  test_size = sum(1 for line in open(testFeat))
 
   CHANNELS = int(config['CHANNELS'])
 
@@ -59,10 +57,10 @@ def main ( testdatadir, modelsdir ):
   
   print "\nTest on Test set: "
   import XRT_REG_test
-  XRT_REG_test.main(testFeat, testLabel, modelsdir, resultsdir+"/test.pwer")
-  print "Predicted WER are stored in "+ resultsdir+"/test.pwer"
+  XRT_REG_test.main(testFeat, testLabel, modelsdir, out_file)
+  print "Predicted WER are stored in "+ out_file
   
 if __name__=='__main__':
-  sys.exit(main(sys.argv[1]), sys.argv[2])
+  sys.exit(main(sys.argv[1]), sys.argv[2], sys.argv[3])
 
 
