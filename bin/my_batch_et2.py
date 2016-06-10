@@ -26,6 +26,7 @@ from sklearn.linear_model import RandomizedLasso
 import yaml
 import numpy as np
 
+from __main__ import config
 
 def main(train_label, train_feat, modelsdir, selfeat):
 
@@ -43,7 +44,7 @@ def main(train_label, train_feat, modelsdir, selfeat):
     print "Performing feature selection ..."
     # initializes selection estimator
     sel_est = RandomizedLasso(alpha="bic", verbose=True, max_iter=1000,
-                              n_jobs=int(nj), random_state=42,
+                              n_jobs=int(config['n_jobs']), random_state=42,
                               n_resampling=1000)
   
     sel_est.fit(X_trains, y_train)
@@ -61,7 +62,7 @@ def main(train_label, train_feat, modelsdir, selfeat):
     featsel_str = ".randcv"
 
 
-  estimator = ExtraTreesRegressor(random_state=42, n_jobs=1)
+  estimator = ExtraTreesRegressor(random_state=42, n_jobs=int(config['n_jobs']))
 
   mae_scorer = make_scorer(mean_absolute_error, greater_is_better=False)
   #rmse_scorer = make_scorer(mean_absolute_error, greater_is_better=False)
@@ -80,8 +81,8 @@ def main(train_label, train_feat, modelsdir, selfeat):
    # "criterion": ["gini", "entropy"]}
 
   search = RandomizedSearchCV(estimator, param_distributions,
-            n_iter=int(config['RR_iter']),
-            scoring=mae_scorer, n_jobs=8, refit=True,
+            n_iter=int(config['RR_Iter']),
+            scoring=mae_scorer, n_jobs=int(config['n_jobs']), refit=True,
             cv=KFold(X_train.shape[0], int(config['folds']), shuffle=True, random_state=42),
             verbose=1, random_state=42)
   
@@ -100,7 +101,7 @@ def main(train_label, train_feat, modelsdir, selfeat):
        n_estimators=search.best_params_["n_estimators"], 
        verbose=1, 
        random_state=42, 
-       n_jobs=8)
+       n_jobs=int(config['n_jobs']))
 
   print "Train the model with the best parameters ..."
   estimator2.fit(X_trains,y_train)
