@@ -10,7 +10,7 @@ import json
 
 
 # include the commands directories
-BINDIR = "/home/jalalvand/Downloads/TranscRater-master"
+BINDIR = os.getcwd()
 sys.path.insert(0, BINDIR+"/bin")
 sys.path.insert(0, BINDIR+"/MLR-QE")
 
