@@ -22,7 +22,6 @@ def main ( testdatadir, modelsdir, out_file ):
     
   testLabel = config['BASEDIR']+"/temp/RR/test_label/test_label"
   testFeat = config['BASEDIR']+"/temp/RR/test_feat/test_feat"
-  test_size = sum(1 for line in open(testFeat))
 
   CHANNELS = int(config['CHANNELS'])
 
@@ -32,6 +31,7 @@ def main ( testdatadir, modelsdir, out_file ):
   for ch in range(CHANNELS):
     if not os.path.exists( testdatadir+"/test_CH_"+str(ch+1)+".wer" ):
       print "Warning!!! WER file "+ testdatadir+"/test_CH_"+str(ch+1)+".wer not found"
+      test_size =  sum(1 for line in open(config['testREF']))
       label_list.append( np.zeros([test_size, 1]) )
     else:
       label_list.append( np.nan_to_num(np.genfromtxt( testdatadir+"/test_CH_"+str(ch+1)+".wer",delimiter=' ')) )
