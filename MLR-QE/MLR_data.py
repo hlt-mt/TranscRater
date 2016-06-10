@@ -11,7 +11,9 @@ from __main__ import config
 
 def main(setname):
 
-
+     if not os.path.exists( config['RANKLIBDIR']+"/RankLib-2.6.jar" ):
+         print "ERROR!!! RankLib is not ready in "+config['RANKLIBDIR']+"/RankLib-2.6.jar"
+         return
      if not os.path.exists( config['BASEDIR']+"/temp" ):
          os.makedirs( config['BASEDIR']+"/temp" )
      if not os.path.exists( config['BASEDIR']+"/temp/MLR" ):
