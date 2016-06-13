@@ -61,6 +61,6 @@ def main (test_feat, test_label, qe_models, outfile):
   
   
 if __name__=='__main__':
-  sys.exit(main(sys.argv[1], sys.argv[2],sys.argv[3]))
+  sys.exit(main(sys.argv[1], sys.argv[2], sys.argv[3]))
   
   	
