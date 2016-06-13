@@ -1,0 +1,46 @@
+{
+
+"BASEDIR":"/home/jalalvand/Desktop/TranscRater/egs/CHiME3",
+"BINDIR":"/home/jalalvand/Desktop/TranscRater",
+
+"RNNLMDIR" : "/home/jalalvand/Desktop/rnnlm/rnnlm-0.3e",
+"SRILMDIR" : "/home/jalalvand/Desktop/srilm/bin/i686-m64",
+"TREETAGDIR" : "/home/jalalvand/Desktop/fbk_functions/TreeTagger/bin",
+"RANKLIBDIR" : "/home/jalalvand/Downloads",
+
+"RNNLM1" : "",
+"RNNLM2" : "lm/rnnlm1M",
+"SRILM1" : "lm/srilm1M_4gr.blm",
+"SRILM2" : "",
+
+"LEXFEAT" : "/home/jalalvand/Desktop/TranscRater/AUXFILE/LexicalFeatures.txt",
+
+
+"CHANNELS" : "5",
+
+
+"trainREF" : "data/train.ref",
+"train_waveChannels" : "data/lists/train_CH_1_wav.list data/lists/train_CH_2_wav.list data/lists/train_CH_3_wav.list data/lists/train_CH_4_wav.list data/lists/train_CH_5_wav.list",
+"train_transcChannels" : "data/transcriptions/train_CH_1.txt data/transcriptions/train_CH_2.txt data/transcriptions/train_CH_3.txt data/transcriptions/train_CH_4.txt data/transcriptions/train_CH_5.txt",
+"train_transcChannels_ctm" : "data/transcriptions/train_CH_1.ctm data/transcriptions/train_CH_2.ctm data/transcriptions/train_CH_3.ctm data/transcriptions/train_CH_4.ctm data/transcriptions/train_CH_5.ctm",
+
+"testREF":"data/test.ref",
+"test_waveChannels" : "data/lists/test_CH_1_wav.list data/lists/test_CH_2_wav.list data/lists/test_CH_3_wav.list data/lists/test_CH_4_wav.list data/lists/test_CH_5_wav.list",
+"test_transcChannels" : "data/transcriptions/test_CH_1.txt data/transcriptions/test_CH_2.txt data/transcriptions/test_CH_3.txt data/transcriptions/test_CH_4.txt data/transcriptions/test_CH_5.txt",
+"test_transcChannels_ctm" : "data/transcriptions/test_CH_1.ctm data/transcriptions/test_CH_2.ctm data/transcriptions/test_CH_3.ctm data/transcriptions/test_CH_4.ctm data/transcriptions/test_CH_5.ctm",
+
+"MICROPHONES":"5",
+"ASR_SYSTEMS":"1",
+
+"FEAT" : "LEX_POS_LM",
+
+"folds":"5",
+
+"RR_Iter":"10",
+"n_jobs" : "1",
+
+                
+"MLR_Tune":"No"
+
+}
+
