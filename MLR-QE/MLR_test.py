@@ -50,12 +50,13 @@ def main(testFile,modelsdir,outfile):
     import rank_array
     pred_rank_mat = rank_array.main(scores_mat)
 
+    np.savetxt( outfile, pred_rank_mat, fmt='%d') 
      
     # ----------------- Compute NDCG
     import compute_NDCG
     compute_NDCG.main ( labels_rank_mat, pred_rank_mat )
     
-   
+    
 if __name__ == "__main__":
    main(sys.argv[1],sys.argv[2],sys.argv[3])
 
