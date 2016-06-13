@@ -6,7 +6,7 @@ Training and test respectively contain 1,640 and 1,320 sentences.
 
 
 ### Fast Run
-To run the toolkit fastly without using signal features (SIG), set the following variables in "./configuration1.conf" file:
+To run the toolkit fastly without using signal features (SIG), set the following variables in "config.json" file:
 ```
 BASEDIR= the full path of the directory of CHiME3 exsample on your computer.
 BINDIR= the full path of the directory of "TranscRater" directory.
@@ -16,12 +16,7 @@ RANKLIBDIR= the full path of the directory of RankLib-2.6.jar
 ```
 Then run the following command:
 ```
-time . ../../bin/run-QE.sh configuration1.conf
-```
-
-Change the QE=RR variable to QE=MLR and then run:
-```
-time . ../../bin/run-QE.sh configuration1.conf
+python run-QE.sh 
 ```
 
 ## Descriptions
@@ -47,9 +42,12 @@ and
 - ./data/transcriptions/test_CH_5.txt
 - ./data/transcriptions/test_CH_6.txt
 
+
 ### Using SIG features
 
-In order to use the signal based features, the user needs to download the audio data from (http://spandh.dcs.shef.ac.uk/chime_challenge/chime_download.html) and provides a list of the audio files (full path) in a file and put the name of this list in the corresponding field in the configuration file. 
+The signal features need for .ctm format of the transcription. Therefore the user needs to provide them in "./data/transcription/" folder.
+
+Also the user needs to download the audio data from (http://spandh.dcs.shef.ac.uk/chime_challenge/chime_download.html) and provides a list of the audio files (full path) in a file and put the name of this list in the corresponding field in the configuration file. 
 
 To do so:
 1. item click on the link above
@@ -61,35 +59,19 @@ To do so:
 Follow the same procedure to download the evaluation set by selecting "CHiME3_isolated_et05_real" and then "CHiME3_isolated_et05_real.zip". 
 Again the transcriptions of these audio files by the baseline ASR systems are provided in "./data/transcriptions/test_CH_i.txt".
 
-
-After downloading the audio files the user needs to prepare a list file for each microphone, in the same order as the reference files. 
-For example, if the unzipped file is in 
-```
-CHDIR=/home/jalalvand/Downloads/CHiME3
-```
-then one can use the following bash command to make the audio list file for each microphone:
-```
-TranscRater> for Mic in 1 3 4 5 6; do
-cat data/train.ref | cut -d" " -f1 | 
-sed "s/_real//g" | tr "[:lower:]" "[:upper:]"|
-while read id; do 
-find ${CHDIR}/data/audio/16kHz/isolated/dt05_*/${id}.CH${Mic}.wav 
-done > ./data/lists/train_CH_${Mic}.list
-```
-
-Note that we won't use the second microphone as it is placed on the back side of the tablet device and it mostly captures the noise.
+After downloading the signals, you need to provide a list of the signals for each channel in "./data/lists/" directory like the provided examples.
 
 The same command can be used for the evaluation set:
-```
-TranscRater> for Mic in 1 3 4 5 6; do
-cat data/test.ref | cut -d" " -f1 | 
-sed "s/_real//g" | tr "[:lower:]" "[:upper:]"|
-while read id; do 
-find ${CHDIR}/data/audio/16kHz/isolated/et05_*/${id}.CH${Mic}.wav 
-done > ./data/lists/test_CH_${Mic}.list
-```
 
 Then run the following command:
 ```
-time . ../../bin/run-QE.sh configuration2.conf
+~/TranscRater> python run-QE.py
 ```
+
+### Using LEX features
+
+### Using POS features
+
+### Using LM features
+
+### Using UDF features
