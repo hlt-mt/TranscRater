@@ -23,7 +23,6 @@
 
 "folds" : "5",
 
-"QE" : "MLR",
 "RR_Iter" : "10",
 "n_jobs" : "1",
                 
