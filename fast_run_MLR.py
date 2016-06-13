@@ -20,7 +20,7 @@ with open("config.json", 'r') as f:
 train_file  = config['BASEDIR']+"/data/MLR_train_"+config['FEAT']+".data"
 test_file   = config['BASEDIR']+"/data/MLR_test_"+config['FEAT']+".data"
 models      = config['BASEDIR']+"/MLR_models"
-output_file = config['BASEDIR']+"/resutls/test.pred"
+output_file = config['BASEDIR']+"/results/test.pred"
 
 
 # prepare the train data
