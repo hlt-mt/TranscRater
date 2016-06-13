@@ -9,7 +9,10 @@ from __main__ import config
 
 
 def main ( traindatadir, modelsdir ):
-  
+ 
+  print "Train RR model on "+traindatadir
+
+ 
   if not os.path.exists( traindatadir ):
     print "ERROR!!! train data directory \""+traindatadir+"\" not found"
     return  
