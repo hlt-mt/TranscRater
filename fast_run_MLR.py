@@ -10,17 +10,27 @@ import json
 
 
 # include the commands directories
-BINDIR = os.getcwd()  # dardesar
+BINDIR = os.getcwd()  
 sys.path.insert(0, BINDIR+"/bin")
 sys.path.insert(0, BINDIR+"/MLR-QE")
 
+
+# load config.json file
 with open("config.json", 'r') as f:
    config = json.load(f)
 
+# set variables
 train_file  = config['BASEDIR']+"/data/MLR_train_"+config['FEAT']+".data"
 test_file   = config['BASEDIR']+"/data/MLR_test_"+config['FEAT']+".data"
 models      = config['BASEDIR']+"/MLR_models"
 output_file = config['BASEDIR']+"/results/test.pred"
+
+# make folders
+if not os.path.exists( config['BASEDIR']+"/temp" ):
+  os.makedirs( config['BASEDIR']+"/temp" )
+if not os.path.exists( config['BASEDIR']+"/results" ):
+  os.makedirs( config['BASEDIR']+"/results" )
+
 
 
 # prepare the train data
