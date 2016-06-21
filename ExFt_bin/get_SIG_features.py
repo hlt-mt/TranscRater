@@ -23,20 +23,20 @@ import numpy as np
 
 from __main__ import config
 
-# laod the ctm files (words, times, posteriors)
+# laod the ctm files (words, times)
 def load_ctm (ctmf):
   old_ind = ""
   ctm_id = []
   tmp = []
   doc_in = open(ctmf, 'r')
   for line in doc_in:
-    new_ind, digit, t1, l, word, posterior = line.strip().split()
+    new_ind, digit, t1, l, word = line.strip().split()
     if not new_ind == old_ind:
       old_ind = new_ind
       if len(tmp) > 0:
         ctm_id.append(tmp)
         tmp = []
-    tmp.append([new_ind, digit, t1, l, word, posterior])
+    tmp.append([new_ind, digit, t1, l, word])
   if len(tmp) > 0:
     ctm_id.append(tmp)
   doc_in.close()
