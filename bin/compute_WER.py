@@ -57,7 +57,8 @@ def main(ref, hyp):
                 WER_arr = np.append( WER_arr, (d[len(r)][len(h)] / len(r)) )
               
             else:
-                print "ERROR!!! hyp id:"+rrr[0]+" does not match with ref id:"+hhh[0]
+                print "ERROR!!! hyp id:"+rl.strip().split()[0]+" does not match with ref id:"+hl.strip().split()[0]
+                print "HINT: You might need to reorder the transcriptions and the references to be compatible\n"
                 return
 
     return WER_arr
