@@ -80,7 +80,7 @@ def main(setname):
 
   if (config['SRILM1']):
     print "      Extract LM features by " + config['SRILM1'] + "..."
-    Command =  config['SRILMDIR'] + "/ngram  -lm " + config['SRILM1'] + " -order 4 -ppl " + TMP + "/" + setname + "_all_LM.txt -debug 2 2>&1 | grep \"\[\" | cut -d'=' -f2 | awk '{print $2}'"
+    Command =  config['SRILMDIR'] + "/ngram  -lm " + config['SRILM1'] + " -order 4 -ppl " + TMP + "/" + setname + "_all_LM.txt -debug 2 | grep \"\[\" | cut -d'=' -f2 | awk '{print $2}'"
     os.system(Command + " > " + TMP+"/"+setname+"_all.sri1")
     flag=1
     tmplmfeat += " " + TMP + "/" + setname + "_all.sri1"
@@ -88,7 +88,7 @@ def main(setname):
 
   if (config['SRILM2']):
     print "      Extract LM features by " + config['SRILM2'] + "..."
-    Command =  config['SRILMDIR'] + "/ngram  -lm " + config['SRILM2'] + " -order 4 -ppl " + TMP + "/" + setname + "_all_LM.txt -debug 2 2>&1 | grep \"\[\" | cut -d'=' -f2 | awk '{print $2}'"
+    Command =  config['SRILMDIR'] + "/ngram  -lm " + config['SRILM2'] + " -order 4 -ppl " + TMP + "/" + setname + "_all_LM.txt -debug 2 | grep \"\[\" | cut -d'=' -f2 | awk '{print $2}'"
     os.system(Command + " > " + TMP+"/"+setname+"_all.sri2")
     flag=1
     tmplmfeat += " " + TMP + "/" + setname + "_all.sri2"

@@ -30,7 +30,7 @@ def main(setname):
       print "ERROR!!! User Defined Feature file %s does not exist" % udf_file
       return
     else:  
-      udf_feat = np.nan_to_num(np.genfromtxt(, delimiter=' '))
+      udf_feat = np.nan_to_num(np.genfromtxt( udf_file, delimiter=' ') )
       
       # Control if the UDF file has the same number of instances as data size
       if udf_feat.shape[0] != data_size:
@@ -39,5 +39,4 @@ def main(setname):
         
         
 if __name__=='__main__':
-  sys.exit(main(sys.argv[1])
-        
+  sys.exit(main(sys.argv[1]))  
