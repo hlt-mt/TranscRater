@@ -9,7 +9,7 @@
 "RANKLIBDIR" : "/home/jalalvand/Downloads",
 
 "RNNLM1" : "",
-"RNNLM2" : "l",
+"RNNLM2" : "lm/rnnlm1M",
 "SRILM1" : "lm/srilm1M_4gr.blm",
 "SRILM2" : "",
 
@@ -32,7 +32,7 @@
 "MICROPHONES":"5",
 "ASR_SYSTEMS":"1",
 
-"FEAT" : "LEX",
+"FEAT" : "LEX_POS_LM",
 
 "folds":"5",
 
