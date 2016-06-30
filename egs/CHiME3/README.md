@@ -86,11 +86,13 @@ We suggest the users to train the language models with regard to their tasks.
 
 ### Using POS features
 Part-Of-Speech features are extracted using the TreeTagger. For each word in the transcription, they consider the score assigned to the predicted POS of the word itself, the previous and the  following  one. 
+
 "ExFt_bin/get_POS_features.py" prepares the transcriptions and run the TreeTagger to extract the scores.
 "ExFt_bin/POS_feature.py" collects the features and computes the mean of the values per sentence.
 
 ### Using UDF features
 User Defined Features are other features that the user may optionally add to the system. The format of the files must be like a feature file per sentence in a txt file. 
+
 "ExFt_bin/get_UDF_features.py" simply control the user defined features if the size and the number of lines match the training and test sizes
 
 
