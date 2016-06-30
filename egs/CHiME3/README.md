@@ -61,7 +61,7 @@ Again the transcriptions of these audio files by the baseline ASR systems are pr
 
 After downloading the signals, you need to provide a list of the signals for each channel in "./data/lists/" directory like the provided examples.
 
-# Note that the order of the files in the lists must match the order of the references.
+#### Note that the order of the files in the lists must match the order of the references.
 
 Then run the following command:
 ```
