@@ -3,25 +3,23 @@ An open-source tool for  automatic speech recognition (ASR) quality estimation (
 
 ### Description
 The tool, allows performing ASR evaluation bypassing the need of reference transcripts and confidence information, which is common to current assessment protocols.
-TranscRater consists of two main modules: feature extraction and QE purpose machine learning. 
+TranscRater consists of two main modules: feature extraction and QE machine learning. 
 
 ### Requirements
-The requirments for machine learning module:
-- Linux OS
+The requirments:
 - "Python" > v2.7
 - "SciPy" 
 - "sklearn" python library (http://scikit-learn.org/stable/install.html)
-- java v1.8 (http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
+- "java v1.8" (http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
 - "RankLib" v2.6 (https://sourceforge.net/projects/lemur/files/lemur/RankLib-2.6/RankLib-2.6.jar/download)
 
-The requirments for feature extraction:
--  "python\_speech\_features" for signal processing toolkit (https://github.com/jameslyons/python\_speech\_features)
+- "python\_speech\_features" for signal processing toolkit (https://github.com/jameslyons/python\_speech\_features)
 - "RNNLM" recurrent neural network language model toolkit (http://www.fit.vutbr.cz/~imikolov/rnnlm/rnnlm-0.3e.tgz)
 - "SRILM" n-gram language model toolkit (http://www.speech.sri.com/projects/srilm/download.html)
 - "TreeTagger" part-of-speech tagging toolkit (http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/tree-tagger-linux-3.2.tar.gz)
 
 ### Installation:
-The toolkit by itself does not need any installation nor compile. The user needs to download and compile the aforementioned requirments and modify the following environment variables at the top of the configuration file:
+The toolkit by itself does not need any installation nor compile. The user needs to download and compile the aforementioned requirments and modify the following environment variables in the configuration file ("config.json"):
 
 - RNNLMDIR= the directory of RNNLM
 - SRILMDIR= the directory of SRILM
@@ -50,6 +48,7 @@ To see the first output of the system with machine-learned ranking (MLR) models:
 1. download RankLib-2.6.jar and set its path in config.json
 2. ~/TranscRater> python fast_run_MLR.py
 ```
+
 This script will:
 ```
 1. use the data "./data/features/train_*" to train a ranking model,
