@@ -25,6 +25,11 @@ def main(setname):
   
   print "    Extract POS features for %s ..." % setname
 
+  if not os.path.exist(config['TREETAGDIR'] + "/tree-tagger") :
+    print "ERROR!!! in ExFt_bin/get_POS_features.py "
+    print "         "+config['TREETAGDIR'] + "/tree-tagger "+" does not exist. You might need to download and compile it and then set its location in config.json"
+    return
+
   # define the transcription channels (training or test set) 
   if setname == "train" :
     transcChannels = config['train_transcChannels'].strip().split()
