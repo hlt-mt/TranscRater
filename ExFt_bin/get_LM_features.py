@@ -64,6 +64,10 @@ def main(setname):
   #   (general-domain RNN, in-domain RNN, general-domain 4grLM and in-domain 4grLM
   if (config['RNNLM1']):
     print "      Extract LM features by " + config['RNNLM1'] + "..."
+    if not os.path.exists ( config['RNNLMDIR'] + "/rnnlm" ):
+      print "ERROR!!! in ExFt_bin/get_LM_features.py "
+      print config['RNNLMDIR'] + "/rnnlm"+" does not exist. You might need to download and compile it and then set its location in config.json"
+      return
     Command = config['RNNLMDIR'] + "/rnnlm -rnnlm " + config['RNNLM1'] + " -test " + TMP + "/" + setname + "_all_LM.txt  -debug 2 | sed -n '6,$p' | head -n -4 | awk '{print $2}'" 
     os.system(Command + " > " + TMP+"/"+setname+"_all.rnn1")
     flag=1
@@ -72,6 +76,10 @@ def main(setname):
 
   if (config['RNNLM2']):
     print "      Extract LM features by " + config['RNNLM2'] + "..."
+    if not os.path.exists ( config['RNNLMDIR'] + "/rnnlm" ):
+      print "ERROR!!! in ExFt_bin/get_LM_features.py "
+      print config['RNNLMDIR'] + "/rnnlm"+" does not exist. You might need to download and compile it and then set its location in config.json"
+      return
     Command = config['RNNLMDIR'] + "/rnnlm -rnnlm " + config['RNNLM2'] + " -test " + TMP + "/" + setname + "_all_LM.txt  -debug 2 | sed -n '6,$p' | head -n -4 | awk '{print $2}'" 
     os.system(Command + " > " + TMP+"/"+setname+"_all.rnn2")
     flag=1
@@ -80,6 +88,10 @@ def main(setname):
 
   if (config['SRILM1']):
     print "      Extract LM features by " + config['SRILM1'] + "..."
+    if not os.path.exists ( config['SRILMDIR'] + "/ngram" ):
+      print "ERROR!!! in ExFt_bin/get_LM_features.py "
+      print config['SRILMDIR'] + "/ngram"+" does not exist. You might need to download and compile it and then set its location in config.json"
+      return
     Command =  config['SRILMDIR'] + "/ngram  -lm " + config['SRILM1'] + " -order 4 -ppl " + TMP + "/" + setname + "_all_LM.txt -debug 2 | grep \"\[\" | cut -d'=' -f2 | awk '{print $2}'"
     os.system(Command + " > " + TMP+"/"+setname+"_all.sri1")
     flag=1
@@ -88,6 +100,10 @@ def main(setname):
 
   if (config['SRILM2']):
     print "      Extract LM features by " + config['SRILM2'] + "..."
+    if not os.path.exists ( config['SRILMDIR'] + "/ngram" ):
+      print "ERROR!!! in ExFt_bin/get_LM_features.py "
+      print config['SRILMDIR'] + "/ngram"+" does not exist. You might need to download and compile it and then set its location in config.json"
+      return
     Command =  config['SRILMDIR'] + "/ngram  -lm " + config['SRILM2'] + " -order 4 -ppl " + TMP + "/" + setname + "_all_LM.txt -debug 2 | grep \"\[\" | cut -d'=' -f2 | awk '{print $2}'"
     os.system(Command + " > " + TMP+"/"+setname+"_all.sri2")
     flag=1
