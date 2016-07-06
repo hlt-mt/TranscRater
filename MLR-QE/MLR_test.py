@@ -28,24 +28,25 @@ def main(testFile,modelsdir,outfile):
     data_size = num_lines = sum(1 for line in open(testFile))
 
     # load the labels
-    labels = np.array([])
+    labels = []
     with open(testFile, 'r') as fin:
           for line in fin:
-              labels = np.append (labels, int(line.split(' ')[0]))
-    labels_rank_mat = labels.reshape([labels.shape[0]/int(config['CHANNELS']), int(config['CHANNELS'])])
-    
+              labels = np.append (labels, int(line.split(' ')[0]) )
+    labels_rank_mat = labels.reshape([int(labels.shape[0]/int(config['CHANNELS'])), int(config['CHANNELS'])])
+   
+ 
     # predict the ranks
     args = [config['RANKLIBDIR']+"/RankLib-2.6.jar", "-load", modelsdir+"/MLR.model",
             "-rank", testFile, "-norm", "zscore", "-metric2T", "NDCG@"+config['CHANNELS'],
-            "-score", config['BASEDIR'] + "/temp/MLR/Scores 2>&1 | grep WriteNothing"]
+            "-score", config['BASEDIR'] + "/temp/MLR/Scores "]
     subprocess.Popen('java -jar' + (''.join(list(str(" " + e) for e in args))), shell=True, stdout=subprocess.PIPE).stdout.read()
 
     # load the predicted scores into a matrix
-    scores = np.array([])
+    scores = []
     with open(config['BASEDIR'] + "/temp/MLR/Scores", 'r') as fin:
           for line in fin:  
                scores = np.append( scores, "{0:.3f}".format(float(line.split('\t')[2])) ) 
-    scores_mat = scores.reshape([scores.shape[0]/int(config['CHANNELS']), int(config['CHANNELS'])]).astype(np.float)
+    scores_mat = scores.reshape([int(scores.shape[0]/int(config['CHANNELS'])), int(config['CHANNELS'])]).astype(np.float)
 
     import rank_array
     pred_rank_mat = rank_array.main(scores_mat)
