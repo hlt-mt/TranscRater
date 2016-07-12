@@ -13,7 +13,7 @@ The requirments:
 - "java v1.8" (http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
 - "RankLib" v2.6 (https://sourceforge.net/projects/lemur/files/lemur/RankLib-2.6/RankLib-2.6.jar/download)
 
-- "python\_speech\_features" for signal processing toolkit (https://github.com/jameslyons/python\_speech\_features)
+- "python\_speech\_features" for signal processing toolkit (https://github.com/jameslyons/python_speech_features)
 - "RNNLM" recurrent neural network language model toolkit (http://www.fit.vutbr.cz/~imikolov/rnnlm/rnnlm-0.3e.tgz)
 - "SRILM" n-gram language model toolkit (http://www.speech.sri.com/projects/srilm/download.html)
 - "TreeTagger" part-of-speech tagging toolkit (http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/tree-tagger-linux-3.2.tar.gz)
