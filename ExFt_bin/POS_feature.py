@@ -25,7 +25,7 @@ def main(setname, pos_feature_file):
   w2p_len = len(w2p)
 
   ch=0
-  f=[]
+  f = ""
 
   # [1-6] NUM NOU FUN VER ADJ ADV TOT
   pos1 = np.empty((0,3), float)

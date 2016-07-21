@@ -45,8 +45,8 @@ def main(setname):
   
   # also compute the rank of each transcription channel for each sentence
   import rank_array
-  rank_matrix = rank_array.main(wer_matrix)
-  
+  rank_matrix = rank_array.main(wer_matrix, config['use_ties'])
+
   np.savetxt( config['BASEDIR'] + "/data/features/"+setname+".rank", rank_matrix , fmt='%d') 
   
   for ch in range(CHANNELS):

@@ -9,6 +9,8 @@ from __main__ import *
 
 def main(setname):
 
+  print "    Control the UDF features..."
+
   # define the transcription channels (training or test set)
   if setname == "train" :
     data_size = sum(1 for line in open(config['trainREF']))
