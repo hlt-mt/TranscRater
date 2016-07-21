@@ -19,7 +19,10 @@ def main ( testdatadir, modelsdir, out_file ):
     os.makedirs( config['BASEDIR']+"/temp/RR/test_label" )
   if not os.path.exists( config['BASEDIR']+"/temp/RR/test_feat" ):
     os.makedirs( config['BASEDIR']+"/temp/RR/test_feat" )
-    
+   
+
+  test_size =  sum(1 for line in open(config['testREF']))
+
   testLabel = config['BASEDIR']+"/temp/RR/test_label/test_label"
   testFeat = config['BASEDIR']+"/temp/RR/test_feat/test_feat"
 
@@ -29,25 +32,26 @@ def main ( testdatadir, modelsdir, out_file ):
   feat_list = []
 
   for ch in range(CHANNELS):
+    channel_wer = np.zeros([test_size])
     if not os.path.exists( testdatadir+"/test_CH_"+str(ch+1)+".wer" ):
       print "Warning!!! WER file "+ testdatadir+"/test_CH_"+str(ch+1)+".wer not found"
-      test_size =  sum(1 for line in open(config['testREF']))
-      label_list.append( np.zeros([test_size, 1]) )
     else:
-      label_list.append( np.nan_to_num(np.genfromtxt( testdatadir+"/test_CH_"+str(ch+1)+".wer",delimiter=' ')) )
+      channel_wer += np.loadtxt (testdatadir+"/test_CH_"+str(ch+1)+".wer",delimiter=' ')
+      label_list.append( channel_wer )
     if not os.path.exists( testdatadir+"/test_CH_"+str(ch+1)+"_"+config['FEAT']+".feat" ):
       print "ERROR!!! Feature file "+ testdatadir+"/test_CH_"+str(ch+1)+"_"+config['FEAT']+".feat not found"
       return
     else:
-      feat_list.append( np.nan_to_num(np.genfromtxt( testdatadir+"/test_CH_"+str(ch+1)+"_"+config['FEAT']+".feat",delimiter=' ')) )
-  
-
-  data_size = label_list[0].shape[0]  
+      tmparr = np.loadtxt (testdatadir+"/test_CH_"+str(ch+1)+"_"+config['FEAT']+".feat",delimiter=' ') 
+      if tmparr.ndim == 1:
+        tmparr = tmparr.reshape([1,len(tmparr)])
+      feat_list.append( tmparr )
+ 
   feat_number = feat_list[0].shape[1]
   
-  data_label = np.zeros([CHANNELS*data_size, 1])
-  data_feat = np.zeros([CHANNELS*data_size, feat_number])
-  for i in range(data_size):
+  data_label = np.zeros([CHANNELS*test_size])
+  data_feat = np.zeros([CHANNELS*test_size, feat_number])
+  for i in range(test_size):
     for ch in range(CHANNELS):
       data_label[i*CHANNELS+ch] = label_list[ch][i] 
       data_feat[i*CHANNELS+ch] = feat_list[ch][i]
