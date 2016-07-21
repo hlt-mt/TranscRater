@@ -4,7 +4,6 @@ Created on May 31, 2016
 @author: qwaider
 '''
 import sys, getopt,os
-#from __main__ import *
 from itertools import izip
 from __main__ import config
 
@@ -51,7 +50,6 @@ def main(setname):
          qid=setlist[obj]
          for ch in range(len(CHANNELS)):
              ind=ch+1
-             #print "ch:"+str(ch)+" ind:"+str(ind)
              i=0
              from itertools import izip
              textfile1= open(config['BASEDIR']+"/data/features/"+setname+"_CH_"+str(ind)+".rank")

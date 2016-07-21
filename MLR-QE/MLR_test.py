@@ -37,7 +37,7 @@ def main(testFile,modelsdir,outfile):
  
     # predict the ranks
     args = [config['RANKLIBDIR']+"/RankLib-2.6.jar", "-load", modelsdir+"/MLR.model",
-            "-rank", testFile, "-norm", "zscore", "-metric2T", "NDCG@"+config['CHANNELS'],
+            "-rank", testFile,"-norm", "zscore", "-metric2T", "NDCG@"+config['CHANNELS'],
             "-score", config['BASEDIR'] + "/temp/MLR/Scores "]
     subprocess.Popen('java -jar' + (''.join(list(str(" " + e) for e in args))), shell=True, stdout=subprocess.PIPE).stdout.read()
 
@@ -48,8 +48,9 @@ def main(testFile,modelsdir,outfile):
                scores = np.append( scores, "{0:.3f}".format(float(line.split('\t')[2])) ) 
     scores_mat = scores.reshape([int(scores.shape[0]/int(config['CHANNELS'])), int(config['CHANNELS'])]).astype(np.float)
 
+    # convert ranking scores into ranks
     import rank_array
-    pred_rank_mat = rank_array.main(scores_mat)
+    pred_rank_mat = rank_array.main(scores_mat, config['use_ties'])
 
     np.savetxt( outfile, pred_rank_mat, fmt='%d') 
      

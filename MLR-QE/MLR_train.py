@@ -16,15 +16,16 @@ def tune_MLR(RANKLIBDIR,trainfile,folds):
     
     log = []
     
+    ndcgat = "NDCG@"+config['CHANNELS']
     for bg in [10 ,50 ,100]:
         for tr in [5, 10, 20]:
             for lf in [5, 10, 20]:             
-                parameters= '-ranker 8 -bag '+str(bg)+' -tree '+str(tr)+' -leaf '+str(lf)+' -rtype 6'
+                parameters= '-ranker 8 -bag '+str(bg)+' -tree '+str(tr)+' -leaf '+str(lf) #+' -rtype 6'
                 print parameters,
                 args=[config['RANKLIBDIR']+"/RankLib-2.6.jar", "-train", trainfile,
                         parameters,
-                        "-srate", "0.1", "-frate", "0.5", "-shrinkage", "0.5" ,"-tc" ,"1" , "-mls", "10",
-                        "-kcv", "5", "-norm zscore -metric2t NDCG@10 -metric2T NDCG@10 | grep Total | awk '{print $NF}' " ]
+                        "-srate", "0.3", "-frate", "0.5", "-shrinkage", "0.5" ,"-tc" ,"1" , "-mls", "10",
+                        "-norm", "zscore", "-kcv", "5", "-metric2t", ndcgat, "-metric2T", ndcgat, " | grep Total | awk '{print $NF}' " ]
                 proc = subprocess.Popen('java -jar'+(''.join(list(str(" "+e) for e in args))), shell=True, stdout=subprocess.PIPE)
                 partial_ndcg = proc.stdout.read()
                 log.append((parameters, partial_ndcg))
@@ -42,7 +43,7 @@ def main(trainfile, modelsdir):
    if not os.path.exists( config['BASEDIR']+"/temp/MLR" ):
        os.makedirs( config['BASEDIR']+"/temp/MLR" )
        
-   best_parameters="-ranker 8 -bag 50 -tree 20 -leaf 10"
+   best_parameters="-ranker 8 -bag 50 -tree 20 -leaf 10" # -rtype 6"
 
    # ----------------- Train/valid RR models
 
@@ -52,11 +53,12 @@ def main(trainfile, modelsdir):
    print "\nTrain MLR models on \""+trainfile+"\" with best parameters of \""+best_parameters+"\" ..."
 
    trainData=trainfile 
-   
+  
+   ndcgat = "NDCG@"+config['CHANNELS'] 
    args=[config['RANKLIBDIR']+"/RankLib-2.6.jar", "-train", trainData, best_parameters,
-                "-srate", "0.1", "-frate", "0.5", "-shrinkage", "0.5" ,"-tc" ,"1" ,
-                "-mls" ,"10","-norm zscore" ,"-metric2t", "NDCG@"+config['CHANNELS'] ,
-                "-save",modelsdir+"/MLR.model 2>&1 | grep WriteNothing"]
+                "-srate", "0.3", "-frate", "0.5", "-shrinkage", "0.5" ,"-tc" ,"1" ,
+                "-norm", "zscore", "-mls" ,"10","-metric2t", ndcgat,
+                "-save",modelsdir+"/MLR.model "]
    subprocess.Popen('java -jar'+(''.join(list(str(" "+e) for e in args))), shell=True, stdout=subprocess.PIPE).stdout.read()
 
 
