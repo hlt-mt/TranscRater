@@ -59,19 +59,26 @@ def main ( setname ):
   # Accumulate the Extracted features for each Channel of transcription
   CHANNELS = int(config['CHANNELS'])
   
-  if '_' in config['FEAT']:  # if different types of features are asked
-  
-    for ch in range(CHANNELS):
+  for ch in range(CHANNELS):
     
-      feat_array = np.array([])
-      for feat in config['FEAT'].split('_'):
-        tmparr = np.nan_to_num(np.genfromtxt(config['BASEDIR']+"/data/features/"+setname+"_CH_"+str(ch+1)+"_"+feat+".feat",delimiter=' '))
-        if (feat_array.size == 0):
-          feat_array = tmparr
-        else:
-          feat_array = np.column_stack ( [ feat_array , tmparr ] )
-     
-      np.savetxt( config['BASEDIR']+"/data/features/"+setname+"_CH_"+str(ch+1)+"_"+config['FEAT']+".feat", feat_array , fmt='%.4f') 
+    feat_array = np.array([])
+    for feat in config['FEAT'].split('_'):
+
+      tmparr = np.nan_to_num(np.genfromtxt(config['BASEDIR']+"/data/features/"+setname+"_CH_"+str(ch+1)+"_"+feat+".feat",delimiter=' '))
+      if tmparr.ndim == 1:
+        tmparr = tmparr.reshape([1,len(tmparr)])
+
+      if (feat_array.size == 0):
+        feat_array = tmparr
+      else:
+        feat_array = np.column_stack ( [feat_array , tmparr ] )
+
+    # normalize the features by zscore
+    #import compute_zscored
+    #feat_array = compute_zscored.main( feat_array )
+
+    # save the feature file
+    np.savetxt( config['BASEDIR']+"/data/features/"+setname+"_CH_"+str(ch+1)+"_"+config['FEAT']+".feat", feat_array , fmt='%.4f') 
     
 
 if __name__=='__main__':

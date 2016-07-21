@@ -54,8 +54,9 @@ def main (test_feat, test_label, qe_models, outfile):
   # if the number of Channels is more than 1, then compute the NDCG of rankings as well
   if CHANNELS > 1:
     import rank_array
-    true_rank_mat =      rank_array.main( X_label.reshape([X_label.shape[0]/CHANNELS, CHANNELS]) ) 
-    pred_rank_mat = rank_array.main( y_pred.reshape([y_pred.shape[0]/CHANNELS, CHANNELS]) )
+    true_rank_mat = rank_array.main( X_label.reshape([X_label.shape[0]/CHANNELS, CHANNELS]) , config['use_ties'] ) 
+    pred_rank_mat = rank_array.main( y_pred.reshape([y_pred.shape[0]/CHANNELS, CHANNELS]) , config['use_ties'] )
+
     import compute_NDCG
     compute_NDCG.main(true_rank_mat, pred_rank_mat)
   
