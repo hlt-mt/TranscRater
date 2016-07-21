@@ -8,6 +8,8 @@ TranscRater consists of two main modules: feature extraction and QE machine lear
 ### Requirements
 The requirments:
 - "Python" > v2.7
+- "json"
+- "yaml"
 - "SciPy" 
 - "sklearn" python library (http://scikit-learn.org/stable/install.html)
 - "java v1.8" (http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
