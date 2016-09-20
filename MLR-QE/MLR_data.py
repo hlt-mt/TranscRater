@@ -24,14 +24,14 @@ def main(setname):
      if setname == 'train':
          CHANNELS=config['train_transcChannels'].split(' ')
          trfile=config['trainREF']
-         with open(config['BASEDIR']+"/"+trfile.strip(),'r') as fin:
+         with open(trfile.strip(),'r') as fin:
            for line in fin:
               setlist.append(line.strip().split(' ')[0])
               
      elif setname == "test":
          CHANNELS=config['test_transcChannels'].split(' ')
          trfile = config['testREF']
-         with open(config['BASEDIR']+"/"+trfile.strip(),'r') as fin:
+         with open(trfile.strip(),'r') as fin:
            for line in fin:
               setlist.append(line.strip().split(' ')[0])
      else :
