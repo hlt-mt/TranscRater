@@ -30,7 +30,15 @@ def load_ctm (ctmf):
   tmp = []
   doc_in = open(ctmf, 'r')
   for line in doc_in:
-    new_ind, digit, t1, l, word = line.strip().split()
+
+    if len(line.strip().split()) == 5:
+      new_ind, digit, t1, l, word = line.strip().split()
+    elif len(line.strip().split()) == 6:
+      new_ind, digit, t1, l, word, post = line.strip().split()
+    else:
+      print "ERROR!!! CTM format is not known"
+      return
+
     if not new_ind == old_ind:
       old_ind = new_ind
       if len(tmp) > 0:
@@ -184,8 +192,11 @@ def main(setname):
       feat_vector = np.append(feat_vector, sil_no / wrd_no ) # silence to noise ratio
   
       feat_vector = np.append(feat_vector, wrd_no / wrd_dur ) # number of words per second (frame)
-  
-      feat_vector = np.append(feat_vector, sil_no / sil_dur )  # number of silences per second (frame)
+ 
+      if sil_dur == 0:
+         feat_vector = np.append(feat_vector, 0 )
+      else:
+         feat_vector = np.append(feat_vector, sil_no / sil_dur )  # number of silences per second (frame)
   
       feat_vector = np.append(feat_vector, wrd_dur )  # total words duration
   
