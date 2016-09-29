@@ -47,7 +47,7 @@ def main(setname):
 
   for ch in range(len(transcChannels)):
     transc = transcChannels[ch]
-    doc_out.write ( "transcrater_start_of_channel_%s" % str(ch+1) )    
+    doc_out.write ( "transcrater_start_of_channel_%s\n" % str(ch+1) )    
     doc_in = open(transc, 'r')
     for line in doc_in:
       for word_elem in line.strip().split():
