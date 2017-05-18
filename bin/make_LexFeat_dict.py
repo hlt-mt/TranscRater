@@ -1,3 +1,8 @@
+# example:
+# bin/make_LexFeat_dict.py Lexicon Phonecategory
+# python bin/make_LexFeat_dict.py AUXFILE/sample.lex AUXFILE/phoneme_categories > AUXFILE/LexicalFeatures.txt
+
+
 import sys
 import numpy as np
 
