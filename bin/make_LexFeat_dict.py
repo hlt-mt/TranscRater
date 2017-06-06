@@ -1,6 +1,8 @@
 # example:
 # bin/make_LexFeat_dict.py Lexicon Phonecategory
 # python bin/make_LexFeat_dict.py AUXFILE/sample.lex AUXFILE/phoneme_categories > AUXFILE/LexicalFeatures.txt
+# this command generates a table like:
+# [word  #Homophones #LexicalNeighbors #Fricatives #Liquids #Nasals #Stops #Vowels #Othertypes]
 
 
 import sys
